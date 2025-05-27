@@ -28,17 +28,35 @@ public class FormCadastroCat extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        CadastroCategoria = new javax.swing.JLabel();
+        NomeCategoria = new javax.swing.JLabel();
+        TextNomeCategoria = new javax.swing.JTextField();
+        CadastrarCategoria = new javax.swing.JButton();
+        CancelarCadastroCategoria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Cadastro de Categoria");
+        CadastroCategoria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        CadastroCategoria.setText("Cadastro de Categoria");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Nome:");
+        NomeCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        NomeCategoria.setText("Nome:");
+
+        CadastrarCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CadastrarCategoria.setText("Cadastrar");
+        CadastrarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarCategoriaActionPerformed(evt);
+            }
+        });
+
+        CancelarCadastroCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CancelarCadastroCategoria.setText("Cancelar");
+        CancelarCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarCadastroCategoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -48,28 +66,47 @@ public class FormCadastroCat extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(109, 109, 109)
-                        .addComponent(jLabel1))
+                        .addComponent(CadastroCategoria))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(jLabel2)
-                        .addGap(59, 59, 59)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(NomeCategoria)
+                                .addGap(59, 59, 59)
+                                .addComponent(TextNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(CancelarCadastroCategoria)
+                                .addGap(58, 58, 58)
+                                .addComponent(CadastrarCategoria)))))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel1)
+                .addComponent(CadastroCategoria)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(204, Short.MAX_VALUE))
+                    .addComponent(NomeCategoria)
+                    .addComponent(TextNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CancelarCadastroCategoria)
+                    .addComponent(CadastrarCategoria))
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CadastrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CadastrarCategoriaActionPerformed
+
+    private void CancelarCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarCadastroCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CancelarCadastroCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,8 +134,10 @@ public class FormCadastroCat extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton CadastrarCategoria;
+    private javax.swing.JLabel CadastroCategoria;
+    private javax.swing.JButton CancelarCadastroCategoria;
+    private javax.swing.JLabel NomeCategoria;
+    private javax.swing.JTextField TextNomeCategoria;
     // End of variables declaration//GEN-END:variables
 }

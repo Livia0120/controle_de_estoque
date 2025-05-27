@@ -28,32 +28,84 @@ public class FormCadastroUniMedida extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        CadastroUnidadeMedida = new javax.swing.JLabel();
+        NomeUnidadeMedida = new javax.swing.JLabel();
+        TextUnidadeMedida = new javax.swing.JTextField();
+        CadastrarUnidadeMedida = new javax.swing.JButton();
+        CancelarCadastroUnidadeMedida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Cadastro de Unidade de Medida");
+        CadastroUnidadeMedida.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        CadastroUnidadeMedida.setText("Cadastro de Unidade de Medida");
+
+        NomeUnidadeMedida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        NomeUnidadeMedida.setText("Nome:");
+
+        CadastrarUnidadeMedida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CadastrarUnidadeMedida.setText("Cadastrar");
+        CadastrarUnidadeMedida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarUnidadeMedidaActionPerformed(evt);
+            }
+        });
+
+        CancelarCadastroUnidadeMedida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CancelarCadastroUnidadeMedida.setText("Cancelar");
+        CancelarCadastroUnidadeMedida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarCadastroUnidadeMedidaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CadastroUnidadeMedida)
+                .addGap(58, 58, 58))
             .addGroup(layout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(jLabel1)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(NomeUnidadeMedida)
+                        .addGap(68, 68, 68)
+                        .addComponent(TextUnidadeMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(CancelarCadastroUnidadeMedida)
+                        .addGap(49, 49, 49)
+                        .addComponent(CadastrarUnidadeMedida)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(CadastroUnidadeMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NomeUnidadeMedida)
+                    .addComponent(TextUnidadeMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CancelarCadastroUnidadeMedida)
+                    .addComponent(CadastrarUnidadeMedida))
+                .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CadastrarUnidadeMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarUnidadeMedidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CadastrarUnidadeMedidaActionPerformed
+
+    private void CancelarCadastroUnidadeMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarCadastroUnidadeMedidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CancelarCadastroUnidadeMedidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -81,6 +133,10 @@ public class FormCadastroUniMedida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton CadastrarUnidadeMedida;
+    private javax.swing.JLabel CadastroUnidadeMedida;
+    private javax.swing.JButton CancelarCadastroUnidadeMedida;
+    private javax.swing.JLabel NomeUnidadeMedida;
+    private javax.swing.JTextField TextUnidadeMedida;
     // End of variables declaration//GEN-END:variables
 }
