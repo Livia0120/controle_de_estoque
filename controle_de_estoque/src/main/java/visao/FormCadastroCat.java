@@ -30,11 +30,12 @@ public class FormCadastroCat extends javax.swing.JFrame {
 
         CadastroCategoria = new javax.swing.JLabel();
         NomeCategoria = new javax.swing.JLabel();
-        TextNomeCategoria = new javax.swing.JTextField();
-        CadastrarCategoria = new javax.swing.JButton();
-        CancelarCadastroCategoria = new javax.swing.JButton();
+        inputTextNomeCategoria = new javax.swing.JTextField();
+        btnCadastrarCategoria = new javax.swing.JButton();
+        btnCancelarCadastroCategoria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Categoria");
 
         CadastroCategoria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         CadastroCategoria.setText("Cadastro de Categoria");
@@ -42,19 +43,19 @@ public class FormCadastroCat extends javax.swing.JFrame {
         NomeCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         NomeCategoria.setText("Nome:");
 
-        CadastrarCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        CadastrarCategoria.setText("Cadastrar");
-        CadastrarCategoria.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrarCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCadastrarCategoria.setText("Cadastrar");
+        btnCadastrarCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastrarCategoriaActionPerformed(evt);
+                btnCadastrarCategoriaActionPerformed(evt);
             }
         });
 
-        CancelarCadastroCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        CancelarCadastroCategoria.setText("Cancelar");
-        CancelarCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelarCadastroCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCancelarCadastroCategoria.setText("Cancelar");
+        btnCancelarCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelarCadastroCategoriaActionPerformed(evt);
+                btnCancelarCadastroCategoriaActionPerformed(evt);
             }
         });
 
@@ -73,12 +74,12 @@ public class FormCadastroCat extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(NomeCategoria)
                                 .addGap(59, 59, 59)
-                                .addComponent(TextNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(inputTextNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
-                                .addComponent(CancelarCadastroCategoria)
+                                .addComponent(btnCancelarCadastroCategoria)
                                 .addGap(58, 58, 58)
-                                .addComponent(CadastrarCategoria)))))
+                                .addComponent(btnCadastrarCategoria)))))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -89,24 +90,24 @@ public class FormCadastroCat extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NomeCategoria)
-                    .addComponent(TextNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputTextNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CancelarCadastroCategoria)
-                    .addComponent(CadastrarCategoria))
+                    .addComponent(btnCancelarCadastroCategoria)
+                    .addComponent(btnCadastrarCategoria))
                 .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CadastrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarCategoriaActionPerformed
+    private void btnCadastrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CadastrarCategoriaActionPerformed
+    }//GEN-LAST:event_btnCadastrarCategoriaActionPerformed
 
-    private void CancelarCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarCadastroCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CancelarCadastroCategoriaActionPerformed
+    private void btnCancelarCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCadastroCategoriaActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarCadastroCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,10 +135,10 @@ public class FormCadastroCat extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CadastrarCategoria;
     private javax.swing.JLabel CadastroCategoria;
-    private javax.swing.JButton CancelarCadastroCategoria;
     private javax.swing.JLabel NomeCategoria;
-    private javax.swing.JTextField TextNomeCategoria;
+    private javax.swing.JButton btnCadastrarCategoria;
+    private javax.swing.JButton btnCancelarCadastroCategoria;
+    private javax.swing.JTextField inputTextNomeCategoria;
     // End of variables declaration//GEN-END:variables
 }

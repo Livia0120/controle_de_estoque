@@ -29,16 +29,17 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenuBar = new javax.swing.JMenu();
+        jMenuCadastros = new javax.swing.JMenu();
         jMenuItemCadastroCategoria = new javax.swing.JMenuItem();
         jMenuItemCadastroProduto = new javax.swing.JMenuItem();
         jMenuItemCadastroUnMedida = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuRelatorio = new javax.swing.JMenu();
+        jMenuItemRelatListaPreco = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de Estoque");
 
-        jMenuBar.setText("File");
+        jMenuCadastros.setText("Cadastros");
 
         jMenuItemCadastroCategoria.setText("Cadastrar categoria");
         jMenuItemCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -46,7 +47,7 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
                 jMenuItemCadastroCategoriaActionPerformed(evt);
             }
         });
-        jMenuBar.add(jMenuItemCadastroCategoria);
+        jMenuCadastros.add(jMenuItemCadastroCategoria);
 
         jMenuItemCadastroProduto.setText("Cadastrar produtos");
         jMenuItemCadastroProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -54,15 +55,29 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
                 jMenuItemCadastroProdutoActionPerformed(evt);
             }
         });
-        jMenuBar.add(jMenuItemCadastroProduto);
+        jMenuCadastros.add(jMenuItemCadastroProduto);
 
         jMenuItemCadastroUnMedida.setText("Cadastrar unidade de medida");
-        jMenuBar.add(jMenuItemCadastroUnMedida);
+        jMenuItemCadastroUnMedida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroUnMedidaActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItemCadastroUnMedida);
 
-        jMenuBar1.add(jMenuBar);
+        jMenuBar1.add(jMenuCadastros);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuRelatorio.setText("Relatórios");
+
+        jMenuItemRelatListaPreco.setText("Lista de Preços");
+        jMenuItemRelatListaPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRelatListaPrecoActionPerformed(evt);
+            }
+        });
+        jMenuRelatorio.add(jMenuItemRelatListaPreco);
+
+        jMenuBar1.add(jMenuRelatorio);
 
         setJMenuBar(jMenuBar1);
 
@@ -81,12 +96,25 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroCategoriaActionPerformed
-        // TODO add your handling code here:
+        FormCadastroCat objeto = new FormCadastroCat();
+        objeto.setVisible(true);
+
     }//GEN-LAST:event_jMenuItemCadastroCategoriaActionPerformed
 
     private void jMenuItemCadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroProdutoActionPerformed
-        // TODO add your handling code here:
+        FormCadastroProd objeto = new FormCadastroProd();
+        objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroProdutoActionPerformed
+
+    private void jMenuItemCadastroUnMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroUnMedidaActionPerformed
+        FormCadastroUniMedida objeto = new FormCadastroUniMedida();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadastroUnMedidaActionPerformed
+
+    private void jMenuItemRelatListaPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatListaPrecoActionPerformed
+        RelatListaPreco objeto = new RelatListaPreco();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemRelatListaPrecoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,11 +142,12 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenuBar;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuItemCadastroCategoria;
     private javax.swing.JMenuItem jMenuItemCadastroProduto;
     private javax.swing.JMenuItem jMenuItemCadastroUnMedida;
+    private javax.swing.JMenuItem jMenuItemRelatListaPreco;
+    private javax.swing.JMenu jMenuRelatorio;
     // End of variables declaration//GEN-END:variables
 }

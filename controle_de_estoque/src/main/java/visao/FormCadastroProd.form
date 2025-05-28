@@ -7,6 +7,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Cadastrar Produtos"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -35,37 +36,36 @@
                           <Group type="102" attributes="0">
                               <Component id="QuantidadeProd" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="TextQuantProd" min="-2" pref="171" max="-2" attributes="0"/>
+                              <Component id="inputTextQuantProduto" min="-2" pref="171" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="QuantidadeMinProd" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="TextQuantMinProd" min="-2" pref="171" max="-2" attributes="0"/>
+                              <Component id="inputTextQtdMinProduto" min="-2" pref="171" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="NomeProd" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="TextNomeProd" min="-2" pref="171" max="-2" attributes="0"/>
+                              <Component id="inputTextNomeProduto" min="-2" pref="171" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="PrecoProd" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="TextPrecoProd" min="-2" pref="171" max="-2" attributes="0"/>
+                              <Component id="inputTextPrecoProduto" min="-2" pref="171" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="QuantidadeMaxProd" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                              <Component id="TextQuantMaxProd" min="-2" pref="171" max="-2" attributes="0"/>
+                              <Component id="inputTextQtdMaxProduto" min="-2" pref="171" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                      <Component id="CancelarCadProd" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnCancelarCadProd" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                      <Component id="CadastroProd" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnCadastroProd" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -85,28 +85,28 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="NomeProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextNomeProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputTextNomeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="PrecoProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextPrecoProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputTextPrecoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="QuantidadeProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TextQuantProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputTextQuantProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="QuantidadeMinProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TextQuantMinProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputTextQtdMinProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="TextQuantMaxProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputTextQtdMaxProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="QuantidadeMaxProd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="88" max="32767" attributes="0"/>
@@ -114,8 +114,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="CancelarCadProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CadastroProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCancelarCadProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCadastroProd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
@@ -165,11 +165,11 @@
         <Property name="text" type="java.lang.String" value="Quantidade M&#xed;nima:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="TextPrecoProd">
+    <Component class="javax.swing.JTextField" name="inputTextPrecoProduto">
     </Component>
-    <Component class="javax.swing.JTextField" name="TextQuantMinProd">
+    <Component class="javax.swing.JTextField" name="inputTextQtdMinProduto">
     </Component>
-    <Component class="javax.swing.JTextField" name="TextQuantProd">
+    <Component class="javax.swing.JTextField" name="inputTextQuantProduto">
     </Component>
     <Component class="javax.swing.JLabel" name="QuantidadeMaxProd">
       <Properties>
@@ -179,19 +179,22 @@
         <Property name="text" type="java.lang.String" value="Quantidade M&#xe1;xima:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="TextQuantMaxProd">
+    <Component class="javax.swing.JTextField" name="inputTextQtdMaxProduto">
     </Component>
-    <Component class="javax.swing.JTextField" name="TextNomeProd">
+    <Component class="javax.swing.JTextField" name="inputTextNomeProduto">
     </Component>
-    <Component class="javax.swing.JButton" name="CancelarCadProd">
+    <Component class="javax.swing.JButton" name="btnCancelarCadProd">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="16" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarCadProdActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="CadastroProd">
+    <Component class="javax.swing.JButton" name="btnCadastroProd">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="16" style="1"/>

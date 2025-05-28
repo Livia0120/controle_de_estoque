@@ -34,16 +34,17 @@ public class FormCadastroProd extends javax.swing.JFrame {
         PrecoProd = new javax.swing.JLabel();
         QuantidadeProd = new javax.swing.JLabel();
         QuantidadeMinProd = new javax.swing.JLabel();
-        TextPrecoProd = new javax.swing.JTextField();
-        TextQuantMinProd = new javax.swing.JTextField();
-        TextQuantProd = new javax.swing.JTextField();
+        inputTextPrecoProduto = new javax.swing.JTextField();
+        inputTextQtdMinProduto = new javax.swing.JTextField();
+        inputTextQuantProduto = new javax.swing.JTextField();
         QuantidadeMaxProd = new javax.swing.JLabel();
-        TextQuantMaxProd = new javax.swing.JTextField();
-        TextNomeProd = new javax.swing.JTextField();
-        CancelarCadProd = new javax.swing.JButton();
-        CadastroProd = new javax.swing.JButton();
+        inputTextQtdMaxProduto = new javax.swing.JTextField();
+        inputTextNomeProduto = new javax.swing.JTextField();
+        btnCancelarCadProd = new javax.swing.JButton();
+        btnCadastroProd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastrar Produtos");
 
         CadProdutos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         CadProdutos.setText("Cadastro de Produto");
@@ -63,11 +64,16 @@ public class FormCadastroProd extends javax.swing.JFrame {
         QuantidadeMaxProd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         QuantidadeMaxProd.setText("Quantidade Máxima:");
 
-        CancelarCadProd.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        CancelarCadProd.setText("Cancelar");
+        btnCancelarCadProd.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnCancelarCadProd.setText("Cancelar");
+        btnCancelarCadProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarCadProdActionPerformed(evt);
+            }
+        });
 
-        CadastroProd.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        CadastroProd.setText("Cadastrar");
+        btnCadastroProd.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnCadastroProd.setText("Cadastrar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,30 +87,29 @@ public class FormCadastroProd extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(QuantidadeProd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TextQuantProd, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(inputTextQuantProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(QuantidadeMinProd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TextQuantMinProd, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(inputTextQtdMinProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(NomeProd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TextNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(inputTextNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(PrecoProd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TextPrecoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(inputTextPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(QuantidadeMaxProd)
                                 .addGap(113, 113, 113)
-                                .addComponent(TextQuantMaxProd, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(inputTextQtdMaxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
-                        .addComponent(CancelarCadProd)
+                        .addComponent(btnCancelarCadProd)
                         .addGap(79, 79, 79)
-                        .addComponent(CadastroProd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnCadastroProd)))
                 .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -119,36 +124,40 @@ public class FormCadastroProd extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NomeProd)
-                    .addComponent(TextNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputTextNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PrecoProd)
-                    .addComponent(TextPrecoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputTextPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(QuantidadeProd)
-                            .addComponent(TextQuantProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputTextQuantProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(QuantidadeMinProd)
-                            .addComponent(TextQuantMinProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputTextQtdMinProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TextQuantMaxProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputTextQtdMaxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(QuantidadeMaxProd))
                         .addContainerGap(88, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CancelarCadProd)
-                            .addComponent(CadastroProd))
+                            .addComponent(btnCancelarCadProd)
+                            .addComponent(btnCadastroProd))
                         .addGap(26, 26, 26))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCadProdActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarCadProdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,18 +186,18 @@ public class FormCadastroProd extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CadProdutos;
-    private javax.swing.JButton CadastroProd;
-    private javax.swing.JButton CancelarCadProd;
     private javax.swing.JLabel NomeProd;
     private javax.swing.JLabel PrecoProd;
     private javax.swing.JLabel QuantidadeMaxProd;
     private javax.swing.JLabel QuantidadeMinProd;
     private javax.swing.JLabel QuantidadeProd;
-    private javax.swing.JTextField TextNomeProd;
-    private javax.swing.JTextField TextPrecoProd;
-    private javax.swing.JTextField TextQuantMaxProd;
-    private javax.swing.JTextField TextQuantMinProd;
-    private javax.swing.JTextField TextQuantProd;
+    private javax.swing.JButton btnCadastroProd;
+    private javax.swing.JButton btnCancelarCadProd;
+    private javax.swing.JTextField inputTextNomeProduto;
+    private javax.swing.JTextField inputTextPrecoProduto;
+    private javax.swing.JTextField inputTextQtdMaxProduto;
+    private javax.swing.JTextField inputTextQtdMinProduto;
+    private javax.swing.JTextField inputTextQuantProduto;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }

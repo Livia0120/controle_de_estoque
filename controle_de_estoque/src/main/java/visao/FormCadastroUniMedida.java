@@ -30,11 +30,12 @@ public class FormCadastroUniMedida extends javax.swing.JFrame {
 
         CadastroUnidadeMedida = new javax.swing.JLabel();
         NomeUnidadeMedida = new javax.swing.JLabel();
-        TextUnidadeMedida = new javax.swing.JTextField();
-        CadastrarUnidadeMedida = new javax.swing.JButton();
-        CancelarCadastroUnidadeMedida = new javax.swing.JButton();
+        inputTextUnidadeMedida = new javax.swing.JTextField();
+        btnCadastrarUnidadeMedida = new javax.swing.JButton();
+        btnCancelarCadUnidadeMedida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastrar Unidade de Medida");
 
         CadastroUnidadeMedida.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         CadastroUnidadeMedida.setText("Cadastro de Unidade de Medida");
@@ -42,19 +43,19 @@ public class FormCadastroUniMedida extends javax.swing.JFrame {
         NomeUnidadeMedida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         NomeUnidadeMedida.setText("Nome:");
 
-        CadastrarUnidadeMedida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        CadastrarUnidadeMedida.setText("Cadastrar");
-        CadastrarUnidadeMedida.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrarUnidadeMedida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCadastrarUnidadeMedida.setText("Cadastrar");
+        btnCadastrarUnidadeMedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastrarUnidadeMedidaActionPerformed(evt);
+                btnCadastrarUnidadeMedidaActionPerformed(evt);
             }
         });
 
-        CancelarCadastroUnidadeMedida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        CancelarCadastroUnidadeMedida.setText("Cancelar");
-        CancelarCadastroUnidadeMedida.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelarCadUnidadeMedida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCancelarCadUnidadeMedida.setText("Cancelar");
+        btnCancelarCadUnidadeMedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelarCadastroUnidadeMedidaActionPerformed(evt);
+                btnCancelarCadUnidadeMedidaActionPerformed(evt);
             }
         });
 
@@ -72,12 +73,12 @@ public class FormCadastroUniMedida extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(NomeUnidadeMedida)
                         .addGap(68, 68, 68)
-                        .addComponent(TextUnidadeMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inputTextUnidadeMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(CancelarCadastroUnidadeMedida)
+                        .addComponent(btnCancelarCadUnidadeMedida)
                         .addGap(49, 49, 49)
-                        .addComponent(CadastrarUnidadeMedida)))
+                        .addComponent(btnCadastrarUnidadeMedida)))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -88,24 +89,24 @@ public class FormCadastroUniMedida extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NomeUnidadeMedida)
-                    .addComponent(TextUnidadeMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputTextUnidadeMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CancelarCadastroUnidadeMedida)
-                    .addComponent(CadastrarUnidadeMedida))
+                    .addComponent(btnCancelarCadUnidadeMedida)
+                    .addComponent(btnCadastrarUnidadeMedida))
                 .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CadastrarUnidadeMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarUnidadeMedidaActionPerformed
+    private void btnCadastrarUnidadeMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarUnidadeMedidaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CadastrarUnidadeMedidaActionPerformed
+    }//GEN-LAST:event_btnCadastrarUnidadeMedidaActionPerformed
 
-    private void CancelarCadastroUnidadeMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarCadastroUnidadeMedidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CancelarCadastroUnidadeMedidaActionPerformed
+    private void btnCancelarCadUnidadeMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCadUnidadeMedidaActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarCadUnidadeMedidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,10 +134,10 @@ public class FormCadastroUniMedida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CadastrarUnidadeMedida;
     private javax.swing.JLabel CadastroUnidadeMedida;
-    private javax.swing.JButton CancelarCadastroUnidadeMedida;
     private javax.swing.JLabel NomeUnidadeMedida;
-    private javax.swing.JTextField TextUnidadeMedida;
+    private javax.swing.JButton btnCadastrarUnidadeMedida;
+    private javax.swing.JButton btnCancelarCadUnidadeMedida;
+    private javax.swing.JTextField inputTextUnidadeMedida;
     // End of variables declaration//GEN-END:variables
 }
