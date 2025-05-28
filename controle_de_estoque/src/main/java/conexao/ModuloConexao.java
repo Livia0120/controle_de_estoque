@@ -15,9 +15,9 @@ public class ModuloConexao {
       //informações do banco de dados
       java.sql.Connection conexao = null;
       String driver = "com.mysql.jdbc.Driver";
-      String url = "jdbc:mysql://localhost:3306/dbinfox";
+      String url = "jdbc:mysql://127.0.0.0:3306/controle_de_estoque";
       String user = "root";
-      String password = "Senhafraca@123";
+      String password = "root";
 
       try{
           Class.forName(driver);
@@ -33,7 +33,6 @@ public class ModuloConexao {
     /*
     Para utilizar a conexão:
     
-    initComponents();
         Connection conexao = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
