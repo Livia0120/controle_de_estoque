@@ -6,7 +6,7 @@ package visao;
 
 /**
  *
- * @author Ana Luiza
+ * @author Ana Luiza & Beatriz Arevalo
  */
 public class FormMenuPrincipal extends javax.swing.JFrame {
     
