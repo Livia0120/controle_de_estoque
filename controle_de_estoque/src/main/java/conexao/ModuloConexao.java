@@ -37,6 +37,6 @@ public class ModuloConexao {
         PreparedStatement pst = null;
         ResultSet rs = null;
 
-        conexao = ModuleConnection.conector();
+        conexao = ModuloConexao.conector();
     */
 }
