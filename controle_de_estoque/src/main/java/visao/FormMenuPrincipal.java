@@ -35,6 +35,7 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
         jMenuItemCadastroUnMedida = new javax.swing.JMenuItem();
         jMenuRelatorio = new javax.swing.JMenu();
         jMenuItemRelatListaPreco = new javax.swing.JMenuItem();
+        jRelatBalanco = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de Estoque");
@@ -68,6 +69,11 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenuCadastros);
 
         jMenuRelatorio.setText("Relatórios");
+        jMenuRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRelatorioActionPerformed(evt);
+            }
+        });
 
         jMenuItemRelatListaPreco.setText("Lista de Preços");
         jMenuItemRelatListaPreco.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +82,14 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuRelatorio.add(jMenuItemRelatListaPreco);
+
+        jRelatBalanco.setText("Balanço Físico e Financeiro");
+        jRelatBalanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRelatBalancoActionPerformed(evt);
+            }
+        });
+        jMenuRelatorio.add(jRelatBalanco);
 
         jMenuBar1.add(jMenuRelatorio);
 
@@ -116,6 +130,15 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatListaPrecoActionPerformed
 
+    private void jMenuRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatorioActionPerformed
+        // TODO add your handlig code here:
+    }//GEN-LAST:event_jMenuRelatorioActionPerformed
+
+    private void jRelatBalancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRelatBalancoActionPerformed
+        FormRelatBalanco objeto = new FormRelatBalanco();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jRelatBalancoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -149,5 +172,6 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemCadastroUnMedida;
     private javax.swing.JMenuItem jMenuItemRelatListaPreco;
     private javax.swing.JMenu jMenuRelatorio;
+    private javax.swing.JMenuItem jRelatBalanco;
     // End of variables declaration//GEN-END:variables
 }
