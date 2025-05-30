@@ -33,6 +33,9 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
         jMenuItemCadastroCategoria = new javax.swing.JMenuItem();
         jMenuItemCadastroProduto = new javax.swing.JMenuItem();
         jMenuItemCadastroUnMedida = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenItemEntradas = new javax.swing.JMenuItem();
+        jMenuIntemSaidas = new javax.swing.JMenuItem();
         jMenuRelatorio = new javax.swing.JMenu();
         jMenuItemRelatListaPreco = new javax.swing.JMenuItem();
         jRelatBalanco = new javax.swing.JMenuItem();
@@ -67,6 +70,26 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
         jMenuCadastros.add(jMenuItemCadastroUnMedida);
 
         jMenuBar1.add(jMenuCadastros);
+
+        jMenu1.setText("Movimentação");
+
+        jMenItemEntradas.setText("Entradas");
+        jMenItemEntradas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenItemEntradasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenItemEntradas);
+
+        jMenuIntemSaidas.setText("Saídas");
+        jMenuIntemSaidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuIntemSaidasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuIntemSaidas);
+
+        jMenuBar1.add(jMenu1);
 
         jMenuRelatorio.setText("Relatórios");
         jMenuRelatorio.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +162,16 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
         objeto.setVisible(true);
     }//GEN-LAST:event_jRelatBalancoActionPerformed
 
+    private void jMenuIntemSaidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIntemSaidasActionPerformed
+     FormSaidaEstoque objeto = new FormSaidaEstoque();
+objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuIntemSaidasActionPerformed
+
+    private void jMenItemEntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenItemEntradasActionPerformed
+             FormEntradaEstoque objeto = new FormEntradaEstoque();
+objeto.setVisible(true);
+    }//GEN-LAST:event_jMenItemEntradasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -165,8 +198,11 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem jMenItemEntradas;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuIntemSaidas;
     private javax.swing.JMenuItem jMenuItemCadastroCategoria;
     private javax.swing.JMenuItem jMenuItemCadastroProduto;
     private javax.swing.JMenuItem jMenuItemCadastroUnMedida;
