@@ -10,5 +10,12 @@ package modelo;
  */
 public class Produto {
     
+  private String nome;
+  private double preco;
+  private int quantidade;
+  private String categoria;
+  private int qtd_minima;
+  private int qtd_maxima; 
+  private String uni_medida;
    
 }
