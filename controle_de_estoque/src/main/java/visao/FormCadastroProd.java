@@ -4,6 +4,7 @@
  */
 package visao;
 
+import javax.swing.JOptionPane;
 import modelo.Produto;
 
 /**
@@ -11,8 +12,9 @@ import modelo.Produto;
  * @author Ana Luiza & Beatriz Arevalo
  */
 public class FormCadastroProd extends javax.swing.JFrame {
-     private Produto objetoProduto;
-    
+
+    private Produto objetoProduto;
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormCadastroProd.class.getName());
 
     public FormCadastroProd() {
@@ -229,7 +231,7 @@ public class FormCadastroProd extends javax.swing.JFrame {
             } else {
                 qtd_minima = Integer.parseInt(this.inputTextQtdMinProduto.getText());
             }
-            
+
             if (this.inputTextQtdMaxProduto.getText().length() < 0) {
                 throw new Mensagem("Quantidade maxima deve ser número e maior que zero.");
             } else {
@@ -241,32 +243,20 @@ public class FormCadastroProd extends javax.swing.JFrame {
             } else {
                 quantidade = Integer.parseInt(this.inputTextQuantProduto.getText());
             }
-            
+
             if (this.inputTextUniMedida.getText().length() < 2) {
                 throw new Mensagem("Unidade de medida deve conter ao menos 1 caractere.");
             } else {
                 uni_medida = this.inputTextUniMedida.getText();
             }
-            
-           
 
-//            // envia os dados para o Controlador cadastrar
-//            if (this.objetoaluno.insertAlunoBD(nome, idade, curso, fase)) {
-//                JOptionPane.showMessageDialog(null, "Aluno Cadastrado com Sucesso!");
-//                // limpa campos da interface
-//                this.JTFNome.setText("");
-//                this.JTFIdade.setText("");
-//                this.JTFCurso.setText("");
-//                this.JTFFase.setText("");
-//            }
-//            // Exibie no console o aluno cadastrado
-//            System.out.println(this.objetoaluno.getMinhaLista().toString());
-//
-//        } catch (Mensagem erro) {
-//            JOptionPane.showMessageDialog(null, erro.getMessage());
-//        } catch (NumberFormatException erro2) {
-//            JOptionPane.showMessageDialog(null, "Informe um número válido.");
-//        }
+           
+          
+        } catch (Mensagem erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        }
     }//GEN-LAST:event_btnCadastroProdActionPerformed
 
     /**
