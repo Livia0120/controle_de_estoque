@@ -10,7 +10,7 @@ package visao;
  */
 
 import java.sql.*;
-import conexao.ModuloConexao;
+import dao.ModuloConexao;
 
 public class GerenciamentoProduto extends javax.swing.JInternalFrame {
 

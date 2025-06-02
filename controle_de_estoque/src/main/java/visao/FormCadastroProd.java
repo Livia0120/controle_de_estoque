@@ -4,19 +4,20 @@
  */
 package visao;
 
+import modelo.Produto;
+
 /**
  *
  * @author Ana Luiza & Beatriz Arevalo
  */
 public class FormCadastroProd extends javax.swing.JFrame {
+     private Produto objetoProduto;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormCadastroProd.class.getName());
 
-    /**
-     * Creates new form FormCadastroProd
-     */
     public FormCadastroProd() {
         initComponents();
+        this.objetoProduto = new Produto();
     }
 
     /**
@@ -79,6 +80,11 @@ public class FormCadastroProd extends javax.swing.JFrame {
 
         btnCadastroProd.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnCadastroProd.setText("Cadastrar");
+        btnCadastroProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastroProdActionPerformed(evt);
+            }
+        });
 
         Categoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Categoria.setText("Categoria:");
@@ -193,6 +199,75 @@ public class FormCadastroProd extends javax.swing.JFrame {
     private void jComboBoxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxCategoriaActionPerformed
+
+    private void btnCadastroProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroProdActionPerformed
+        try {
+            // recebendo e validando dados da interface gráfica.
+            String nome = "";
+            double preco = 0;
+            int quantidade = 0;
+            String uni_medida = "";
+            int qtd_minima = 0;
+            int qtd_maxima = 0;
+            int categoria_id = 0;
+            String categoria = "";
+
+            if (this.inputTextNomeProduto.getText().length() < 2) {
+                throw new Mensagem("Nome deve conter ao menos 2 caracteres.");
+            } else {
+                nome = this.inputTextNomeProduto.getText();
+            }
+
+            if (this.inputTextPrecoProduto.getText().length() <= 0) {
+                throw new Mensagem("Preço deve ser número e maior que zero.");
+            } else {
+                preco = Integer.parseInt(this.inputTextPrecoProduto.getText());
+            }
+
+            if (this.inputTextQtdMinProduto.getText().length() < 0) {
+                throw new Mensagem("Quantidade minima deve ser número e maior que zero.");
+            } else {
+                qtd_minima = Integer.parseInt(this.inputTextQtdMinProduto.getText());
+            }
+            
+            if (this.inputTextQtdMaxProduto.getText().length() < 0) {
+                throw new Mensagem("Quantidade maxima deve ser número e maior que zero.");
+            } else {
+                qtd_maxima = Integer.parseInt(this.inputTextQtdMaxProduto.getText());
+            }
+
+            if (this.inputTextQuantProduto.getText().length() < 0) {
+                throw new Mensagem("Quantidade deve ser número e maior que zero.");
+            } else {
+                quantidade = Integer.parseInt(this.inputTextQuantProduto.getText());
+            }
+            
+            if (this.inputTextUniMedida.getText().length() < 2) {
+                throw new Mensagem("Unidade de medida deve conter ao menos 1 caractere.");
+            } else {
+                uni_medida = this.inputTextUniMedida.getText();
+            }
+            
+           
+
+//            // envia os dados para o Controlador cadastrar
+//            if (this.objetoaluno.insertAlunoBD(nome, idade, curso, fase)) {
+//                JOptionPane.showMessageDialog(null, "Aluno Cadastrado com Sucesso!");
+//                // limpa campos da interface
+//                this.JTFNome.setText("");
+//                this.JTFIdade.setText("");
+//                this.JTFCurso.setText("");
+//                this.JTFFase.setText("");
+//            }
+//            // Exibie no console o aluno cadastrado
+//            System.out.println(this.objetoaluno.getMinhaLista().toString());
+//
+//        } catch (Mensagem erro) {
+//            JOptionPane.showMessageDialog(null, erro.getMessage());
+//        } catch (NumberFormatException erro2) {
+//            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+//        }
+    }//GEN-LAST:event_btnCadastroProdActionPerformed
 
     /**
      * @param args the command line arguments

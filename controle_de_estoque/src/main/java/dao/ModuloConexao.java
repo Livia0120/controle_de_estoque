@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package conexao;
+package dao;
 import java.sql.*;
 
 /**
@@ -14,8 +14,8 @@ public class ModuloConexao {
         
       //informações do banco de dados
       java.sql.Connection conexao = null;
-      String driver = "com.mysql.jdbc.Driver";
-      String url = "jdbc:mysql://127.0.0.0:3306/controle_de_estoque";
+      String driver = "com.mysql.cj.jdbc.Driver";
+      String url = "jdbc:mysql://127.0.0.1:3306/controle_de_estoque";
       String user = "root";
       String password = "root";
 
@@ -39,4 +39,5 @@ public class ModuloConexao {
 
         conexao = ModuloConexao.conector();
     */
+
 }
