@@ -38,8 +38,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Menu = new javax.swing.JMenuBar();
         menCad = new javax.swing.JMenu();
         menCadGP = new javax.swing.JMenuItem();
+        menCadCadProd = new javax.swing.JMenuItem();
+        menMov = new javax.swing.JMenu();
+        menMovEn = new javax.swing.JMenuItem();
+        menMovSai = new javax.swing.JMenuItem();
         menRel = new javax.swing.JMenu();
-        jMenuItemRelatListaPreco = new javax.swing.JMenuItem();
+        menRelLis = new javax.swing.JMenuItem();
+        menRelBal = new javax.swing.JMenuItem();
         MenAj = new javax.swing.JMenu();
         menAjSobre = new javax.swing.JMenuItem();
         menOp = new javax.swing.JMenu();
@@ -82,17 +87,53 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         menCad.add(menCadGP);
 
+        menCadCadProd.setText("Cadastrar Produto");
+        menCadCadProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menCadCadProdActionPerformed(evt);
+            }
+        });
+        menCad.add(menCadCadProd);
+
         Menu.add(menCad);
+
+        menMov.setText("Movimentação");
+
+        menMovEn.setText("Entradas");
+        menMovEn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menMovEnActionPerformed(evt);
+            }
+        });
+        menMov.add(menMovEn);
+
+        menMovSai.setText("Saídas");
+        menMovSai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menMovSaiActionPerformed(evt);
+            }
+        });
+        menMov.add(menMovSai);
+
+        Menu.add(menMov);
 
         menRel.setText("Relatórios");
 
-        jMenuItemRelatListaPreco.setText("Lista de Preços");
-        jMenuItemRelatListaPreco.addActionListener(new java.awt.event.ActionListener() {
+        menRelLis.setText("Lista de Preços");
+        menRelLis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemRelatListaPrecoActionPerformed(evt);
+                menRelLisActionPerformed(evt);
             }
         });
-        menRel.add(jMenuItemRelatListaPreco);
+        menRel.add(menRelLis);
+
+        menRelBal.setText("Balanço Físico e Financeiro");
+        menRelBal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menRelBalActionPerformed(evt);
+            }
+        });
+        menRel.add(menRelBal);
 
         Menu.add(menRel);
 
@@ -157,9 +198,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         desktop.add(objeto);
     }//GEN-LAST:event_menCadGPActionPerformed
 
-    private void jMenuItemRelatListaPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatListaPrecoActionPerformed
-        
-    }//GEN-LAST:event_jMenuItemRelatListaPrecoActionPerformed
+    private void menRelLisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelLisActionPerformed
+        RelatListaPreco objeto = new RelatListaPreco();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_menRelLisActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
@@ -185,6 +227,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
         sobre.setVisible(true);
         desktop.add(sobre);
     }//GEN-LAST:event_menAjSobreActionPerformed
+
+    private void menCadCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadCadProdActionPerformed
+        // TODO add your handling code here:
+        FormCadastroProd objeto = new FormCadastroProd();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_menCadCadProdActionPerformed
+
+    private void menMovEnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menMovEnActionPerformed
+        // TODO add your handling code here:
+        FormEntradaEstoque objeto = new FormEntradaEstoque();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_menMovEnActionPerformed
+
+    private void menMovSaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menMovSaiActionPerformed
+        // TODO add your handling code here:
+        FormSaidaEstoque objeto = new FormSaidaEstoque();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_menMovSaiActionPerformed
+
+    private void menRelBalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelBalActionPerformed
+        // TODO add your handling code here:
+        FormRelatBalanco objeto = new FormRelatBalanco();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_menRelBalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,13 +281,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenAj;
     private javax.swing.JMenuBar Menu;
     private javax.swing.JDesktopPane desktop;
-    private javax.swing.JMenuItem jMenuItemRelatListaPreco;
     private javax.swing.JMenuItem menAjSobre;
     private javax.swing.JMenu menCad;
+    private javax.swing.JMenuItem menCadCadProd;
     private javax.swing.JMenuItem menCadGP;
+    private javax.swing.JMenu menMov;
+    private javax.swing.JMenuItem menMovEn;
+    private javax.swing.JMenuItem menMovSai;
     private javax.swing.JMenu menOp;
     private javax.swing.JMenuItem menOpSair;
     private javax.swing.JMenu menRel;
+    private javax.swing.JMenuItem menRelBal;
+    private javax.swing.JMenuItem menRelLis;
     private javax.swing.JLabel principalDataLBL;
     private javax.swing.JLabel principalUsuarioLBL;
     // End of variables declaration//GEN-END:variables
