@@ -31,5 +31,10 @@ RNF03: O sistema deve responder às operações de cadastro, consulta e moviment
 RNF04: A geração de relatórios deve ser rápida e eficiente.  
 RNF05: O sistema deve garantir a integridade dos dados de estoque, evitando perdas ou inconsistências.  
 RNF06: O sistema deve ter mecanismos para lidar com erros de entrada de dados e evitar falhas críticas.  
-RNF07: O código-fonte deve ser bem documentado e estruturado para facilitar a manutenção.
+RNF07: O código-fonte deve ser bem documentado e estruturado para facilitar a manutenção.  
+
+  ## Documentação
+
+arquivo do banco de dados: control_estoque_a3.sql
+
 
