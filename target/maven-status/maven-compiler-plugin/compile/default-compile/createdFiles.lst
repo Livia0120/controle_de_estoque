@@ -44,6 +44,7 @@ visao\MenuPrincipal$6.class
 visao\FormMenuPrincipal$5.class
 visao\FormSaidaEstoque$3.class
 visao\FormSaidaEstoque.class
+dao\MovimentacaoDAO.class
 visao\GerenciamentoProduto$3.class
 modelo\Produto.class
 visao\GerenciamentoProduto.class
