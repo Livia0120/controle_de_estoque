@@ -4,6 +4,7 @@
  */
 package visao;
 
+import dao.ProdutoDAO;
 import javax.swing.JOptionPane;
 import modelo.Produto;
 
@@ -203,59 +204,24 @@ public class FormCadastroProd extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxCategoriaActionPerformed
 
     private void btnCadastroProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroProdActionPerformed
-        try {
-            // recebendo e validando dados da interface gráfica.
-            String nome = "";
-            double preco = 0;
-            int quantidade = 0;
-            String uni_medida = "";
-            int qtd_minima = 0;
-            int qtd_maxima = 0;
-            int categoria_id = 0;
-            String categoria = "";
 
-            if (this.inputTextNomeProduto.getText().length() < 2) {
-                throw new Mensagem("Nome deve conter ao menos 2 caracteres.");
-            } else {
-                nome = this.inputTextNomeProduto.getText();
-            }
+        String nome = inputTextNomeProduto.getText();
+        double preco = Double.parseDouble(inputTextPrecoProduto.getText());
+        int quantidade = Integer.parseInt(inputTextQuantProduto.getText());
+        int categoriaId = jComboBoxCategoria.getSelectedIndex(); // ou valor mapeado
+        String uniMedida = (inputTextUniMedida.getText());
+        int qtdMin = Integer.parseInt(inputTextQtdMinProduto.getText());
+        int qtdMax = Integer.parseInt(inputTextQtdMaxProduto.getText());
 
-            if (this.inputTextPrecoProduto.getText().length() <= 0) {
-                throw new Mensagem("Preço deve ser número e maior que zero.");
-            } else {
-                preco = Integer.parseInt(this.inputTextPrecoProduto.getText());
-            }
+        Produto produto = new Produto(nome, preco, quantidade, "", categoriaId, qtdMin, qtdMax, uniMedida);
 
-            if (this.inputTextQtdMinProduto.getText().length() < 0) {
-                throw new Mensagem("Quantidade minima deve ser número e maior que zero.");
-            } else {
-                qtd_minima = Integer.parseInt(this.inputTextQtdMinProduto.getText());
-            }
+        boolean sucesso = ProdutoDAO.insertProduto(produto);
 
-            if (this.inputTextQtdMaxProduto.getText().length() < 0) {
-                throw new Mensagem("Quantidade maxima deve ser número e maior que zero.");
-            } else {
-                qtd_maxima = Integer.parseInt(this.inputTextQtdMaxProduto.getText());
-            }
-
-            if (this.inputTextQuantProduto.getText().length() < 0) {
-                throw new Mensagem("Quantidade deve ser número e maior que zero.");
-            } else {
-                quantidade = Integer.parseInt(this.inputTextQuantProduto.getText());
-            }
-
-            if (this.inputTextUniMedida.getText().length() < 2) {
-                throw new Mensagem("Unidade de medida deve conter ao menos 1 caractere.");
-            } else {
-                uni_medida = this.inputTextUniMedida.getText();
-            }
-
-           
-          
-        } catch (Mensagem erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage());
-        } catch (NumberFormatException erro2) {
-            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        if (sucesso) {
+            JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
+       
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar produto.");
         }
     }//GEN-LAST:event_btnCadastroProdActionPerformed
 
