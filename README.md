@@ -40,7 +40,7 @@ Sistema desenvolvido com a finalidade de gerenciar estoque, podendo o usuário c
 #### GitHub
 [AnaLuiza2412](https://github.com/AnaLuiza2412)  
 [biaArevaloFreitas](https://github.com/biaArevaloFreitas)    
-[Gustavo Godinho](https://github.com/gustavo-godinho)
+[Gustavo Godinho](https://github.com/gustavo-godinho)        
 [Livia0120](https://github.com/Livia0120)    
 [steinbachvitor](https://github.com/steinbachvitor) 
      
