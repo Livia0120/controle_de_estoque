@@ -29,20 +29,22 @@ Sistema desenvolvido com a finalidade de gerenciar estoque, podendo o usuário c
 ```javascript
 | Nome:                         | RA:         |      
 |-------------------------------|-------------|
-| Gustavo Godinho               | 10724268995 | 
 | Ana Luiza Seemann Felisbino   | 10724268572 | 
-| Beatriz Arevalo Freitas       | 10725115625 | 
+| Beatriz Arevalo Freitas       | 10725115625 |
+| Gustavo Godinho               | 10724268995 | 
+| Lívia de Oliveira             | 10725115228 |
 | Vitor Steinbach               | 10724268585 | 
-| Lívia de Oliveira             | 10725115228 | 
 
 ```
 
 #### GitHub
 [AnaLuiza2412](https://github.com/AnaLuiza2412)  
-[biaArevaloFreitas](https://github.com/biaArevaloFreitas)            
-[steinbachvit](https://github.com/steinbachvit)  
-[Livia0120](https://github.com/Livia0120)         
-Gustavo Godinho
+[biaArevaloFreitas](https://github.com/biaArevaloFreitas)    
+[Gustavo Godinho](https://github.com/gustavo-godinho)
+[Livia0120](https://github.com/Livia0120)    
+[steinbachvitor](https://github.com/steinbachvitor) 
+     
+
 
 ## 🛠 Tecnologias utilizadas
 - Apache NetBeans IDE 26
