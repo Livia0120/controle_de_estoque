@@ -1,16 +1,17 @@
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\dao\ModuloConexao.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\dao\MovimentacaoDAO.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\dao\ProdutoDAO.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\modelo\Produto.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\principal\Principal.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\visao\FormCadastroProd.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\visao\FormCategoria.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\visao\FormEntradaEstoque.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\visao\FormMenuPrincipal.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\visao\FormRelatBalanco.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\visao\FormSaidaEstoque.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\visao\FormSobre.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\visao\GerenciamentoProduto.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\visao\Mensagem.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\visao\MenuPrincipal.java
-C:\Users\User\Documents\NetBeansProjects\A3- programacao\controle_de_estoque\src\main\java\visao\RelatListaPreco.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\dao\ModuloConexao.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\dao\MovimentacaoDAO.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\dao\ProdutoDAO.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\modelo\Categoria.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\modelo\Produto.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\principal\Principal.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\visao\FormCadastroProd.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\visao\FormCategoria.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\visao\FormEntradaEstoque.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\visao\FormMenuPrincipal.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\visao\FormRelatBalanco.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\visao\FormSaidaEstoque.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\visao\FormSobre.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\visao\GerenciamentoProduto.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\visao\Mensagem.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\visao\MenuPrincipal.java
+C:\Users\be062997\Documents\NetBeansProjects\controle_de_estoque\src\main\java\visao\RelatListaPreco.java

@@ -12,6 +12,7 @@ visao\MenuPrincipal$8.class
 visao\FormMenuPrincipal.class
 visao\FormEntradaEstoque$1.class
 dao\ProdutoDAO.class
+modelo\Categoria.class
 visao\FormSobre.class
 visao\GerenciamentoProduto$4.class
 visao\FormEntradaEstoque$4.class
