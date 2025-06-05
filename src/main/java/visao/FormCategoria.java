@@ -4,9 +4,13 @@
  */
 package visao;
 
+import dao.CategoriaDAO;
+import javax.swing.JOptionPane;
+import modelo.Categoria;
+
 /**
  *
- * @author be062997
+ * @author Beatriz Arevalo Freitas
  */
 public class FormCategoria extends javax.swing.JFrame {
     
@@ -36,8 +40,8 @@ public class FormCategoria extends javax.swing.JFrame {
         jComboBoxTamanho = new javax.swing.JComboBox<>();
         jInputTextNomeCateg = new javax.swing.JTextField();
         CadProdutos = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botaoCancelar = new javax.swing.JButton();
+        botaoCadastrarCategoria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,8 +52,18 @@ public class FormCategoria extends javax.swing.JFrame {
         jLabel4.setText("Embalagem:");
 
         jComboBoxEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lata", "Vidro", "Plastico", " " }));
+        jComboBoxEmbalagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEmbalagemActionPerformed(evt);
+            }
+        });
 
         jComboBoxTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pequeno", "Médio", "Grande", " " }));
+        jComboBoxTamanho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTamanhoActionPerformed(evt);
+            }
+        });
 
         jInputTextNomeCateg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,14 +74,19 @@ public class FormCategoria extends javax.swing.JFrame {
         CadProdutos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         CadProdutos.setText("Cadastro de Categoria");
 
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoCancelar.setText("Cancelar");
+        botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoCancelarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cadastrar");
+        botaoCadastrarCategoria.setText("Cadastrar");
+        botaoCadastrarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCadastrarCategoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,7 +108,7 @@ public class FormCategoria extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
+                            .addComponent(botaoCadastrarCategoria)
                             .addComponent(jComboBoxEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(47, 47, 47))
             .addGroup(layout.createSequentialGroup()
@@ -99,7 +118,7 @@ public class FormCategoria extends javax.swing.JFrame {
                         .addComponent(CadProdutos))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
-                        .addComponent(jButton1)))
+                        .addComponent(botaoCancelar)))
                 .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,8 +142,8 @@ public class FormCategoria extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(botaoCancelar)
+                    .addComponent(botaoCadastrarCategoria))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
@@ -135,9 +154,39 @@ public class FormCategoria extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jInputTextNomeCategActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
+         this.dispose();
+    }//GEN-LAST:event_botaoCancelarActionPerformed
+
+    private void jComboBoxTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTamanhoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jComboBoxTamanhoActionPerformed
+
+    private void jComboBoxEmbalagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmbalagemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEmbalagemActionPerformed
+
+    private void botaoCadastrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarCategoriaActionPerformed
+        String nome = jInputTextNomeCateg.getText().trim();
+        String tamanho = jComboBoxTamanho.getSelectedItem().toString();
+        String embalagem = jComboBoxEmbalagem.getSelectedItem().toString();
+        
+        if (!nome.isEmpty()) {
+        Categoria categoria = new Categoria(nome, tamanho, embalagem);
+        boolean sucesso = CategoriaDAO.inserirCategoria(categoria);
+
+        if (sucesso) {
+            JOptionPane.showMessageDialog(this, "Categoria cadastrada com sucesso!");
+            jInputTextNomeCateg.setText("");
+            jComboBoxTamanho.setSelectedIndex(0);
+            jComboBoxEmbalagem.setSelectedIndex(0);
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar categoria.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "O campo nome é obrigatório.");
+    }
+    }//GEN-LAST:event_botaoCadastrarCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,8 +215,8 @@ public class FormCategoria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CadProdutos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton botaoCadastrarCategoria;
+    private javax.swing.JButton botaoCancelar;
     private javax.swing.JComboBox<String> jComboBoxEmbalagem;
     private javax.swing.JComboBox<String> jComboBoxTamanho;
     private javax.swing.JTextField jInputTextNomeCateg;

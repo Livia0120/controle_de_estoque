@@ -6,7 +6,7 @@ package modelo;
 
 /**
  *
- * @author be062997
+ * @author Beatriz Arevalo Freitas
  */
 public class Categoria {
     private int id;
