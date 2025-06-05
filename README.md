@@ -59,4 +59,4 @@ Credenciais do Banco de Dados MySQL
   Senha: root
 ```
 Repositório de script do banco de dados: 
-[control_estoque_a3](https://github.com/Livia0120/controle_de_estoque/blob/main/control_estoque_a3.sql)
+[control_estoque_a3](https://github.com/Livia0120/controle_de_estoque/blob/main/controle_estoque_a3-.sql)
