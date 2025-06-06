@@ -16,7 +16,7 @@ import modelo.Categoria;
  */
 public class CategoriaDAO {
     public static boolean inserirCategoria(Categoria categoria) {
-        String sql = "INSERT INTO categorias (nome, tamanho, embalagem) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO categoria (nome, tamanho, embalagem) VALUES (?, ?, ?)";
 
         try (Connection con = ModuloConexao.conector();
              PreparedStatement pst = con.prepareStatement(sql)) {

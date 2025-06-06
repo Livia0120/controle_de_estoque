@@ -15,9 +15,9 @@ public class ModuloConexao {
       //informações do banco de dados
       java.sql.Connection conexao = null;
       String driver = "com.mysql.cj.jdbc.Driver";
-      String url = "jdbc:mysql://127.0.0.1:3306/controle_de_estoque";
+      String url = "jdbc:mysql://127.0.0.1:3306/controle_estoque";
       String user = "root";
-      String password = "root"; 
+      String password = "1Qaz2wsx@"; 
 
       try{
           Class.forName(driver);

@@ -15,7 +15,7 @@ public class Produto {
   private String nome;
   private double preco;
   private int quantidade;
-  private String categoria;
+  private Categoria categoria;
   private int categoriaId;
   private int qtd_minima;
   private int qtd_maxima; 
@@ -53,11 +53,11 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
@@ -86,10 +86,10 @@ public class Produto {
     }
     
     public Produto() {
-         this("", 0.0, 0, "", 0, 0, 0, "");
+         this("", 0.0, 0, null, 0, 0, 0, "");
     }
 
-    public Produto(String nome, double preco, int quantidade, String categoria, int categoriaId, int qtd_minima, int qtd_maxima, String uni_medida) {
+    public Produto(String nome, double preco, int quantidade, Categoria categoria, int categoriaId, int qtd_minima, int qtd_maxima, String uni_medida) {
         this.nome = nome;
         this.preco = preco;
         this.quantidade = quantidade;
@@ -103,7 +103,7 @@ public class Produto {
     
   
   
-    public boolean insertProdutoBD(String nome, double preco, int quantidade, String categoria,
+    public boolean insertProdutoBD(String nome, double preco, int quantidade, Categoria categoria,
                                    int categoriaId, String uni_medida, int qtd_minima, int qtd_maxima) {
         Produto produto = new Produto();
         produto.setNome(nome);

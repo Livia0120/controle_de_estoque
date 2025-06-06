@@ -213,7 +213,7 @@ public class FormCadastroProd extends javax.swing.JFrame {
         int qtdMin = Integer.parseInt(inputTextQtdMinProduto.getText());
         int qtdMax = Integer.parseInt(inputTextQtdMaxProduto.getText());
 
-        Produto produto = new Produto(nome, preco, quantidade, "", categoriaId, qtdMin, qtdMax, uniMedida);
+        Produto produto = new Produto(nome, preco, quantidade, null, categoriaId, qtdMin, qtdMax, uniMedida);
 
         boolean sucesso = ProdutoDAO.insertProduto(produto);
 
