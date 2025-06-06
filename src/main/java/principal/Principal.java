@@ -19,8 +19,8 @@ public class Principal {
 //        ProdutoDAO teste = new ProdutoDAO();
 //        Produto produto_1 = new Produto();
         
-//        FormMenuPrincipal objetoScreen = new FormMenuPrincipal(); // Instancia a interface gráfica
-//        objetoScreen.setVisible(true); // Torna a janela visível
+        FormMenuPrincipal objetoScreen = new FormMenuPrincipal(); // Instancia a interface gráfica
+        objetoScreen.setVisible(true); // Torna a janela visível
 }
     
 }

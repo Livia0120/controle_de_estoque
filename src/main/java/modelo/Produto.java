@@ -1,34 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 import dao.ProdutoDAO;
-
 /**
  *
  * @author Beatriz Arevalo Freitas
  */
 public class Produto {
-    
-  private String nome;
-  private double preco;
-  private int quantidade;
-  private Categoria categoria;
-  private int categoriaId;
-  private int qtd_minima;
-  private int qtd_maxima; 
-  private String uni_medida;
-  
-    public int getCategoriaId() {
-        return categoriaId;
+
+    private int id;
+    private String nome;
+    private double preco;
+    private int quantidade;
+    private Categoria categoria;
+    private int categoriaId;
+    private int qtd_minima;
+    private int qtd_maxima;
+    private String uni_medida;
+
+    // Getter e Setter do ID (faltava!)
+    public int getId() {
+        return id;
     }
 
-    public void setCategoriaId(int categoriaId) {
-        this.categoriaId = categoriaId;
+    public void setId(int id) {
+        this.id = id;
     }
-  
+
+    // Demais getters e setters
     public String getNome() {
         return nome;
     }
@@ -61,6 +59,14 @@ public class Produto {
         this.categoria = categoria;
     }
 
+    public int getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(int categoriaId) {
+        this.categoriaId = categoriaId;
+    }
+
     public int getQtd_minima() {
         return qtd_minima;
     }
@@ -84,24 +90,23 @@ public class Produto {
     public void setUni_medida(String uni_medida) {
         this.uni_medida = uni_medida;
     }
-    
+
+    // Construtor vazio
     public Produto() {
-         this("", 0.0, 0, null, 0, 0, 0, "");
+        this("", 0.0, 0, null, 0, 0, 0, "");
     }
 
+    // Construtor completo
     public Produto(String nome, double preco, int quantidade, Categoria categoria, int categoriaId, int qtd_minima, int qtd_maxima, String uni_medida) {
-        this.nome = nome;
-        this.preco = preco;
-        this.quantidade = quantidade;
-        this.categoria = categoria;
-        this.categoriaId = categoriaId;
-        this.qtd_minima = qtd_minima;
-        this.qtd_maxima = qtd_maxima;
-        this.uni_medida = uni_medida;
-    }
-    
-    
-  
+    this.nome = nome;
+    this.preco = preco;
+    this.quantidade = quantidade;
+    this.categoria = categoria;  
+    this.categoriaId = categoriaId;
+    this.qtd_minima = qtd_minima;
+    this.qtd_maxima = qtd_maxima;
+    this.uni_medida = uni_medida;
+}
   
     public boolean insertProdutoBD(String nome, double preco, int quantidade, Categoria categoria,
                                    int categoriaId, String uni_medida, int qtd_minima, int qtd_maxima) {
@@ -117,7 +122,4 @@ public class Produto {
 
         return ProdutoDAO.insertProduto(produto);
     }
-    
-    
-
 }
