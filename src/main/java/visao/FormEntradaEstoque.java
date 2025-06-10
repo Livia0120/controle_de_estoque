@@ -3,6 +3,7 @@ package visao;
 
 import modelo.Movimentacao;
 import dao.MovimentacaoDAO;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -149,6 +150,7 @@ public class FormEntradaEstoque extends javax.swing.JFrame {
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
         // TODO add your handling code here:
+try{
       int produtoId = Integer.parseInt(campoCodigoProduto.getText());
         int quantidade = Integer.parseInt(CampoQuantidade.getText());
         String observacoes = campoObs.getText().trim();
@@ -157,16 +159,44 @@ public class FormEntradaEstoque extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "A quantidade para entrada deve ser maior que zero.", "Erro de Validação", JOptionPane.WARNING_MESSAGE);
             return;
         }
-  
+   // Adicione validação para produtoId, se necessário
+        if (produtoId <= 0) {
+            JOptionPane.showMessageDialog(this, "O ID do Produto deve ser um número válido e positivo.", "Erro de Validação", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+          String tipoMovimentacao = "ENTRADA"; 
 
-        JOptionPane.showMessageDialog(this, "Entrada de estoque registrada com sucesso!");
-        
-        // Opcional: Limpar campos após o sucesso
+        Movimentacao novaMovimentacao = new Movimentacao(0, produtoId, tipoMovimentacao, quantidade, null, observacoes);
+
+        // 4. Chamar o MovimentacaoDAO para salvar no banco de dados
+        boolean sucesso = MovimentacaoDAO.adicionarEstoque(novaMovimentacao);
+
+        if (sucesso) {
+            JOptionPane.showMessageDialog(this, "Entrada de estoque registrada com sucesso!");
+
+            // Opcional: Limpar campos após o sucesso
         campoCodigoProduto.setText("");
         CampoQuantidade.setText("");
-       campoObs.setText("");
-       
+        campoObs.setText("");
+    } else {
 
+        JOptionPane.showMessageDialog(this, "Erro ao registrar movimentação de " + tipoMovimentacao + ". Verifique o console.", "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+
+} catch (NumberFormatException ex) {
+    // Captura erro se o texto nos campos não for um número válido
+    JOptionPane.showMessageDialog(this, "Erro: ID do Produto e Quantidade devem ser números válidos.", "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
+
+            ex.printStackTrace();
+        } catch (SQLException e) { //  Bloco catch para exceções de SQL (banco de dados)
+            // Captura exceções específicas do banco de dados
+            JOptionPane.showMessageDialog(this, "Ocorreu um erro no banco de dados: " + e.getMessage(), "Erro de Banco de Dados", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        } catch (Exception e) {
+            // Captura qualquer outra exceção inesperada que possa ocorrer (ex: erro de conexão com DB)
+            JOptionPane.showMessageDialog(this, "Ocorreu um erro inesperado: " + e.getMessage(), "Erro Geral", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

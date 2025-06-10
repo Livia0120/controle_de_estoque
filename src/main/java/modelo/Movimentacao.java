@@ -2,6 +2,7 @@
 package modelo;
 
 import dao.MovimentacaoDAO;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**
@@ -77,7 +78,7 @@ public class Movimentacao {
         this.observacoes = observacoes;
     }
  
-    public boolean adicionarEstoque(int id, int produtoId, String tipo, int quantidade, Timestamp dataMovimentacao, String observacoes) {
+    public boolean adicionarEstoque(int id, int produtoId, String tipo, int quantidade, Timestamp dataMovimentacao, String observacoes) throws SQLException {
         Movimentacao movimentacao = new Movimentacao();
         movimentacao.setId(id);
         movimentacao.setProdutoId(produtoId);
@@ -90,7 +91,7 @@ public class Movimentacao {
 
     }
 
-    public boolean removerEstoque(int id, int produtoId, String tipo, int quantidade, Timestamp dataMovimentacao, String observacoes) {
+    public boolean removerEstoque(int id, int produtoId, String tipo, int quantidade, Timestamp dataMovimentacao, String observacoes) throws SQLException {
         Movimentacao movimentacao = new Movimentacao();
         movimentacao.setId(id);
         movimentacao.setProdutoId(produtoId);

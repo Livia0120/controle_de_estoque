@@ -14,7 +14,7 @@ import modelo.Movimentacao;
 public class MovimentacaoDAO {
 
     // Método para entrada de estoque
-    public static boolean adicionarEstoque (Movimentacao m) {
+    public static boolean adicionarEstoque (Movimentacao m)  throws SQLException {
          String sql = "INSERT INTO Movimentacoes (produto_id, tipo, quantidade, observacoes) VALUES (?, ?, ?, ?)";
 
         Connection conexao = null;
@@ -55,7 +55,7 @@ public class MovimentacaoDAO {
     
 
     // Método para saída de estoque
-    public static boolean removerEstoque(Movimentacao m) {
+    public static boolean removerEstoque(Movimentacao m) throws SQLException {
         String sqlAtualizaEstoque = "UPDATE produtos SET quantidade = quantidade - ? WHERE id = ?";
         String sqlRegistraMovimentacao = "INSERT INTO Movimentacoes (produto_id, tipo, quantidade, observacoes) VALUES (?, ?, ?, ?)";
 

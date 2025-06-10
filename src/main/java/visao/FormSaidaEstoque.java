@@ -1,6 +1,11 @@
 
 package visao;
 
+import dao.MovimentacaoDAO;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import modelo.Movimentacao;
+
 /**
  *
  * @author Livia0120
@@ -27,10 +32,10 @@ public class FormSaidaEstoque extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        campoObs = new javax.swing.JTextArea();
+        campoCodigoProduto = new javax.swing.JTextField();
+        CampoQuantidade = new javax.swing.JTextField();
+        btnConfirmar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,18 +48,23 @@ public class FormSaidaEstoque extends javax.swing.JFrame {
 
         jLabel3.setText("Quantidade:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        campoObs.setColumns(20);
+        campoObs.setRows(5);
+        jScrollPane1.setViewportView(campoObs);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        campoCodigoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                campoCodigoProdutoActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Confirmar");
+        btnConfirmar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton2.setText("cancelar");
@@ -79,12 +89,12 @@ public class FormSaidaEstoque extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                                .addComponent(jTextField2))
+                                .addComponent(campoCodigoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                                .addComponent(CampoQuantidade))
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(53, 53, 53))))
             .addGroup(layout.createSequentialGroup()
@@ -101,14 +111,14 @@ public class FormSaidaEstoque extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnConfirmar)
+                    .addComponent(campoCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CampoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jButton2)))
@@ -120,13 +130,64 @@ public class FormSaidaEstoque extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void campoCodigoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCodigoProdutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_campoCodigoProdutoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+        try{
+      int produtoId = Integer.parseInt(campoCodigoProduto.getText());
+        int quantidade = Integer.parseInt(CampoQuantidade.getText());
+        String observacoes = campoObs.getText().trim();
+         
+ if (quantidade <= 0) {
+            JOptionPane.showMessageDialog(this, "A quantidade para entrada deve ser maior que zero.", "Erro de Validação", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+   // Adicione validação para produtoId, se necessário
+        if (produtoId <= 0) {
+            JOptionPane.showMessageDialog(this, "O ID do Produto deve ser um número válido e positivo.", "Erro de Validação", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+          String tipoMovimentacao = "SAÍDA"; 
+
+        Movimentacao novaMovimentacao = new Movimentacao(0, produtoId, tipoMovimentacao, quantidade, null, observacoes);
+
+        // 4. Chamar o MovimentacaoDAO para salvar no banco de dados
+        boolean sucesso = MovimentacaoDAO.removerEstoque(novaMovimentacao);
+
+        if (sucesso) {
+            JOptionPane.showMessageDialog(this, "Entrada de estoque registrada com sucesso!");
+
+            // Opcional: Limpar campos após o sucesso
+        campoCodigoProduto.setText("");
+        CampoQuantidade.setText("");
+        campoObs.setText("");
+    } else {
+
+        JOptionPane.showMessageDialog(this, "Erro ao registrar movimentação de " + tipoMovimentacao + ". Verifique o console.", "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+
+} catch (NumberFormatException ex) {
+    // Captura erro se o texto nos campos não for um número válido
+    JOptionPane.showMessageDialog(this, "Erro: ID do Produto e Quantidade devem ser números válidos.", "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
+
+            ex.printStackTrace();
+        } catch (SQLException e) { //  Bloco catch para exceções de SQL (banco de dados)
+            // Captura exceções específicas do banco de dados
+            JOptionPane.showMessageDialog(this, "Ocorreu um erro no banco de dados: " + e.getMessage(), "Erro de Banco de Dados", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        } catch (Exception e) {
+            // Captura qualquer outra exceção inesperada que possa ocorrer (ex: erro de conexão com DB)
+            JOptionPane.showMessageDialog(this, "Ocorreu um erro inesperado: " + e.getMessage(), "Erro Geral", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,14 +225,14 @@ public class FormSaidaEstoque extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField CampoQuantidade;
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JTextField campoCodigoProduto;
+    private javax.swing.JTextArea campoObs;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
