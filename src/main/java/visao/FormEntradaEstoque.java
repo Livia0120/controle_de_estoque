@@ -18,6 +18,8 @@ public class FormEntradaEstoque extends javax.swing.JFrame {
      */
     public FormEntradaEstoque() {
         initComponents();
+                setDefaultCloseOperation(FormEntradaEstoque.DISPOSE_ON_CLOSE);
+
     }
 
     /**

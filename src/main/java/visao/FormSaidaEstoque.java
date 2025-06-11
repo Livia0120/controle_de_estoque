@@ -17,6 +17,7 @@ public class FormSaidaEstoque extends javax.swing.JFrame {
      */
     public FormSaidaEstoque() {
         initComponents();
+        setDefaultCloseOperation(FormSaidaEstoque.DISPOSE_ON_CLOSE);
     }
 
     /**

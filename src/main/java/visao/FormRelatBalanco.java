@@ -19,6 +19,7 @@ public class FormRelatBalanco extends javax.swing.JFrame {
     public FormRelatBalanco() {
         initComponents();
         carregarProdutos();
+        setDefaultCloseOperation(FormRelatBalanco.DISPOSE_ON_CLOSE);
     }
 
     private void carregarProdutos() {

@@ -21,6 +21,8 @@ public class FormCategoria extends javax.swing.JFrame {
      */
     public FormCategoria() {
         initComponents();
+                setDefaultCloseOperation(FormCategoria.DISPOSE_ON_CLOSE);
+
     }
 
     /**

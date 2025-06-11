@@ -21,6 +21,7 @@ public class FormCadastroProd extends javax.swing.JFrame {
     public FormCadastroProd() {
         initComponents();
         this.objetoProduto = new Produto();
+        setDefaultCloseOperation(FormCadastroProd.DISPOSE_ON_CLOSE);
     }
 
     /**
