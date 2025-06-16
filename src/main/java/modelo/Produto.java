@@ -3,7 +3,7 @@ package modelo;
 import dao.ProdutoDAO;
 /**
  *
- * @author Beatriz Arevalo Freitas
+ * @author Beatriz Arevalo Freitas & Ana Luiza Seemann Felisbino
  */
 public class Produto {
 
@@ -17,7 +17,6 @@ public class Produto {
     private int qtd_maxima;
     private String uni_medida;
 
-    // Getter e Setter do ID (faltava!)
     public int getId() {
         return id;
     }
@@ -26,7 +25,6 @@ public class Produto {
         this.id = id;
     }
 
-    // Demais getters e setters
     public String getNome() {
         return nome;
     }
@@ -91,12 +89,10 @@ public class Produto {
         this.uni_medida = uni_medida;
     }
 
-    // Construtor vazio
     public Produto() {
         this("", 0.0, 0, null, 0, 0, 0, "");
     }
 
-    // Construtor completo
     public Produto(String nome, double preco, int quantidade, Categoria categoria, int categoriaId, int qtd_minima, int qtd_maxima, String uni_medida) {
     this.nome = nome;
     this.preco = preco;

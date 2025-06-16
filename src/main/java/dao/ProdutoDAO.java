@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dao;
 
 import java.sql.Connection;
@@ -13,10 +10,11 @@ import java.util.List;
 import modelo.Produto;
 
 /**
- *
- * @author Beatriz Arevalo Freitas & Ana Luiza Seemann Felisbino
+ * @author 
+ * Beatriz Arevalo Freitas & Ana Luiza Seemann Felisbino
  */
 public class ProdutoDAO {
+
     public static boolean insertProduto(Produto p) {
         String sql = "INSERT INTO produtos (nome, preco, quantidade, categoria_id, qtd_minima, qtd_maxima, unidade_medida) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -36,10 +34,11 @@ public class ProdutoDAO {
             return true;
 
         } catch (SQLException e) {
-            System.out.println("Não foi possivel cadastrar seu produto: " + e.getMessage());
+            System.out.println("Não foi possível cadastrar o produto: " + e.getMessage());
             return false;
         }
     }
+
     public static List<Produto> listarProdutos() {
         String sql = "SELECT * FROM produtos";
         List<Produto> lista = new ArrayList<>();
@@ -61,8 +60,9 @@ public class ProdutoDAO {
 
                 lista.add(p);
             }
+
         } catch (SQLException e) {
-            System.out.println("Não foi possivel listar seu produto: " + e.getMessage());
+            System.out.println("Não foi possível listar os produtos: " + e.getMessage());
         }
 
         return lista;
@@ -91,7 +91,7 @@ public class ProdutoDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("Não foi possivel buscar seu produto: " + e.getMessage());
+            System.out.println("Não foi possível buscar o produto: " + e.getMessage());
         }
 
         return p;
@@ -117,7 +117,7 @@ public class ProdutoDAO {
             return true;
 
         } catch (SQLException e) {
-            System.out.println("Não foi possivel atualizar seu produto: " + e.getMessage());
+            System.out.println("Não foi possível atualizar o produto: " + e.getMessage());
             return false;
         }
     }
@@ -133,8 +133,46 @@ public class ProdutoDAO {
             return true;
 
         } catch (SQLException e) {
-            System.out.println("Não foi possivel excluir seu produto: " + e.getMessage());
+            System.out.println("Não foi possível excluir o produto: " + e.getMessage());
             return false;
         }
+    }
+
+    public static boolean reajustarPrecos(double percentual) {
+        String sql = "UPDATE produtos SET preco = preco * (1 + ? / 100)";
+
+        try (Connection conexao = ModuloConexao.conector();
+             PreparedStatement pst = conexao.prepareStatement(sql)) {
+
+            pst.setDouble(1, percentual);
+            pst.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Não foi possível reajustar os preços: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public static List<Object[]> listarQuantidadePorCategoria() {
+        String sql = "SELECT c.nome, COUNT(p.id) as quantidade "
+                   + "FROM categorias c LEFT JOIN produtos p ON c.id = p.categoria_id "
+                   + "GROUP BY c.nome";
+
+        List<Object[]> lista = new ArrayList<>();
+
+        try (Connection conexao = ModuloConexao.conector();
+             PreparedStatement pst = conexao.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(new Object[]{rs.getString("nome"), rs.getInt("quantidade")});
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Não foi possível listar a quantidade por categoria: " + e.getMessage());
+        }
+
+        return lista;
     }
 }

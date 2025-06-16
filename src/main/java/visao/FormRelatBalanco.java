@@ -7,6 +7,10 @@ package visao;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import dao.ModuloConexao;
 
 /**
  *
@@ -23,88 +27,73 @@ public class FormRelatBalanco extends javax.swing.JFrame {
     }
 
     private void carregarProdutos() {
-        try {
+        try (Connection conexao = ModuloConexao.conector(); PreparedStatement pst = conexao.prepareStatement(
+                "SELECT nome, quantidade, preco_unitario FROM produto"
+        ); 
+        ResultSet rs = pst.executeQuery()) {
 
-            DefaultTableModel modelo = new DefaultTableModel(
-                    new Object[][]{},
-                    new String[]{"Produto", "Qtd Estoque", "Valor Unit.", "Valor Total"}
-            ) {
-                public boolean isCellEditable(int row, int column) {
-                    return column == 1 || column == 2;
-                }
-            };
-
-            double totalEstoque = 0.0;
-
-            String[] produtos = {"Arroz", "Feijão", "Macarrão", "Óleo"};
-            java.util.Arrays.sort(produtos);
-            java.util.Map<String, Integer> mapaQtds = new java.util.HashMap<>();
-            mapaQtds.put("Arroz", 10);
-            mapaQtds.put("Feijão", 5);
-            mapaQtds.put("Macarrão", 20);
-            mapaQtds.put("Óleo", 8);
-
-            java.util.Map<String, Double> mapaValores = new java.util.HashMap<>();
-            mapaValores.put("Arroz", 5.50);
-            mapaValores.put("Feijão", 7.30);
-            mapaValores.put("Macarrão", 3.40);
-            mapaValores.put("Óleo", 6.80);
-
-            for (String produto : produtos) {
-                int qtd = mapaQtds.get(produto);
-                double valorUnit = mapaValores.get(produto);
-                double valorTotal = qtd * valorUnit;
-                totalEstoque += valorTotal;
-
-                modelo.addRow(new Object[]{
-                    produto,
-                    qtd,
-                    valorUnit,
-                    valorTotal
-                });
+        DefaultTableModel modelo = new DefaultTableModel(
+                new Object[][]{},
+                new String[]{"Produto", "Qtd Estoque", "Valor Unit.", "Valor Total"}
+        ) {
+            public boolean isCellEditable(int row, int column) {
+                return column == 1 || column == 2;
             }
+        };
 
-            tblProdutos.setModel(modelo);
-            
-            modelo.addTableModelListener(e -> {
+        double totalEstoque = 0.0;
+
+        while (rs.next()) {
+            String nome = rs.getString("nome");
+            int qtd = rs.getInt("quantidade");
+            double valorUnit = rs.getDouble("preco");
+            double valorTotal = qtd * valorUnit;
+
+            totalEstoque += valorTotal;
+
+            modelo.addRow(new Object[]{nome, qtd, valorUnit, valorTotal});
+        }
+
+        tblProdutos.setModel(modelo);
+
+        modelo.addTableModelListener(e -> {
             if (e.getType() == TableModelEvent.UPDATE) {
                 int row = e.getFirstRow();
                 int column = e.getColumn();
 
-                if (column == 1 || column == 2) { 
+                if (column == 1 || column == 2) {
                     try {
                         int qtd = Integer.parseInt(modelo.getValueAt(row, 1).toString());
                         double valorUnit = Double.parseDouble(modelo.getValueAt(row, 2).toString());
                         double valorTotal = qtd * valorUnit;
                         modelo.setValueAt(valorTotal, row, 3);
-
-                               
-                         atualizarTotalEstoque();
-
-                            } catch (NumberFormatException ex) {
+                        atualizarTotalEstoque();
+                    } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Valores inválidos. Insira números válidos.");
                     }
                 }
             }
         });
-        lblTotalEstoque.setText("Valor Total do Estoque: R$ " + String.format("%.2f", totalEstoque));
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar produtos: " + e.getMessage());
-        }
-    }
-
-    private void atualizarTotalEstoque() {
-        double totalEstoque = 0.0;
-        DefaultTableModel modelo = (DefaultTableModel) tblProdutos.getModel();
-
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-            double valorTotal = Double.parseDouble(modelo.getValueAt(i, 3).toString());
-            totalEstoque += valorTotal;
-        }
 
         lblTotalEstoque.setText("Valor Total do Estoque: R$ " + String.format("%.2f", totalEstoque));
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erro ao carregar produtos: " + e.getMessage());
     }
+}
+
+private void atualizarTotalEstoque() {
+    double totalEstoque = 0.0;
+    DefaultTableModel modelo = (DefaultTableModel) tblProdutos.getModel();
+
+    for (int i = 0; i < modelo.getRowCount(); i++) {
+        double valorTotal = Double.parseDouble(modelo.getValueAt(i, 3).toString());
+        totalEstoque += valorTotal;
+    }
+
+    lblTotalEstoque.setText("Valor Total do Estoque: R$ " + String.format("%.2f", totalEstoque));
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
