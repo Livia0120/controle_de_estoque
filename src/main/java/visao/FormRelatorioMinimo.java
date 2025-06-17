@@ -1,7 +1,7 @@
 
 package visao;
 
-import java.sql.*;
+import java.sql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,12 +12,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author gusta
  */
-public class FormMinimo extends javax.swing.JFrame {
+public class FormRelatorioMinimo extends javax.swing.JFrame {
 
 
-    public FormMinimo() {
+    public FormRelatorioMinimo() {
         initComponents();
-        setDefaultCloseOperation(FormMinimo.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(FormRelatorioMinimo.DISPOSE_ON_CLOSE);
     }
 
    private void minimoProdutos(){
@@ -34,16 +34,12 @@ public class FormMinimo extends javax.swing.JFrame {
     }
     private void carregarDadosEstoque() {
 
-   
-
     DefaultTableModel modeloMaximo = (DefaultTableModel) tblMinimo.getModel(); 
     modeloMaximo.setRowCount(0);
-
 
     try (Connection conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/controle_de_estoque", "root", "48991385316Gu.");
          Statement stmt = conexao.createStatement();
          ResultSet rs = stmt.executeQuery("SELECT nome, quantidade, qtd_maxima FROM controle_de_estoque where quantidade > qtd_maxima")) {
-
         while (rs.next()) {
             String nome = rs.getString("nome");
             int quantidade = rs.getInt("quantidade");
@@ -111,18 +107,15 @@ public class FormMinimo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormMinimo().setVisible(true);
+                new FormRelatorioMinimo().setVisible(true);
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

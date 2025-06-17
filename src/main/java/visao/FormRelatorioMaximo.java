@@ -12,20 +12,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author gusta
  */
-public class FormMaximo extends javax.swing.JFrame {
+public class FormRelatorioMaximo extends javax.swing.JFrame {
     
 
 
-    public FormMaximo() {
+    public FormRelatorioMaximo() {
         initComponents();
-        setDefaultCloseOperation(FormMaximo.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(FormRelatorioMaximo.DISPOSE_ON_CLOSE);
     }
     private void maximoProdutos(){
          Connection conexao = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-
         conexao = ModuloConexao.conector();
+        
         try{
         rs = pst.executeQuery();
         }catch (Exception e){
@@ -35,42 +35,25 @@ public class FormMaximo extends javax.swing.JFrame {
     private void carregarDadosEstoque() {
 
    
-
     DefaultTableModel modeloMaximo = (DefaultTableModel) tblMaximo.getModel(); 
-  
     modeloMaximo.setRowCount(0);
 
-
     try (Connection conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/controle_de_estoque", "root", "48991385316Gu.");
-
          Statement stmt = conexao.createStatement();
-
          ResultSet rs = stmt.executeQuery("SELECT nome, quantidade, qtd_maxima FROM controle_de_estoque where quantidade > qtd_maxima")) {
-
-
         while (rs.next()) {
 
             String nome = rs.getString("nome");
-
             int quantidade = rs.getInt("quantidade");
-
             int qtdMaxima = rs.getInt("qtd_maxima");
 
             // Adiciona uma nova linha ao modelo da tabela
-
             modeloMaximo.addRow(new Object[]{nome, quantidade, qtdMaxima});
-
         }
-
-
     } catch (SQLException e) {
-
         JOptionPane.showMessageDialog(this, "Erro ao carregar dados: " + e.getMessage(), "Erro de Banco de Dados", JOptionPane.ERROR_MESSAGE);
-
         e.printStackTrace();
-
     }
-
 }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -123,16 +106,14 @@ public class FormMaximo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormMaximo().setVisible(true);
+                new FormRelatorioMaximo().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel MaximoTitulo;
     private javax.swing.JScrollPane jScrollPane1;
