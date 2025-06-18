@@ -6,8 +6,11 @@ package visao;
  * @author Vitor
  */
 
-import java.sql.*;
+
 import dao.ModuloConexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 
