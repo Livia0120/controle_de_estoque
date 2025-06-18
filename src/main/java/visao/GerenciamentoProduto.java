@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 
 public class GerenciamentoProduto extends javax.swing.JInternalFrame {
@@ -29,96 +30,38 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
         rs = null;
 
         conexao = ModuloConexao.conector();
+        pesquisarProduto();
         
     }
-    
-    private void consultar(){
-        String sql="select * from tb_estoques where id=?";
-        
-        try{
-            pst=conexao.prepareStatement(sql);
-            pst.setString(1, txtGPID.getText());
-            rs=pst.executeQuery();
-            if (rs.next()) {
-                txtGPNomeProduto.setText(rs.getString(2));
-                comBoxGPCategorias.setSelectedItem(rs.getString(3));
-                txtGPQtd.setText(rs.getString(4));
-                txtGPQtdMin.setText(rs.getString(5));
-                txtGPQtdMax.setText(rs.getString(6));
-            } else {
-               JOptionPane.showMessageDialog(null, "Produto não encontrado"); 
-            }
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-
-    private void adicionar(){
-        String sql = "insert into tb_estoques(id,nome,categoria,quantidade,"
-                + "quantidadeMin,quantidadeMax) values (?,?,?,?,?,?)";
-        
-        try{
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtGPID.getText());
-            pst.setString(2, txtGPNomeProduto.getText());
-            pst.setString(3, comBoxGPCategorias.getSelectedItem().toString());
-            pst.setString(4, txtGPQtd.getText());
-            pst.setString(5, txtGPQtdMin.getText());
-            pst.setString(6, txtGPQtdMax.getText());
-            //28
-           if((txtGPNomeProduto.getText().isEmpty() ||
-                comBoxGPCategorias.getSelectedItem().toString().isEmpty() ||
-                txtGPQtd.getText().isEmpty() ||
-                txtGPQtdMin.getText().isEmpty() ||
-                txtGPQtdMax.getText().isEmpty())) {
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos");
-            } else {
-                int adicionado = pst.executeUpdate();
-                if(adicionado > 0){
-                    JOptionPane.showMessageDialog(null,"Produto Cadastrado com Sucesso!");
-                    txtGPID.setText(null);
-                    txtGPNomeProduto.setText(null);  
-                    comBoxGPCategorias.setSelectedIndex(0);
-                    txtGPQtd.setText(null);
-                    txtGPQtdMin.setText(null);
-                    txtGPQtdMax.setText(null);
-                }
-            }
-            
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-    
+      
     private void editar(){
-        String sql ="update tb_estoques set nome=?,categoria=?,quantidade=?,"
-                + "quantidadeMin=?,quantidadeMax=? where id=?";
+        String sql ="UPDATE Produtos SET nome =?, quantidade =?, preco =?, qtd_minima =?, qtd_maxima =?, unidade_medida = ?, categoria_id = (SELECT id FROM Categorias WHERE nome = ? "
+                + "LIMIT 1) WHERE id = ? ";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtGPNomeProduto.getText());
-            pst.setString(2, comBoxGPCategorias.getSelectedItem().toString());
-            pst.setString(3, txtGPQtd.getText());
+            pst.setString(2, txtGPQtd.getText());
+            pst.setString(3, txtGPPreco.getText());
             pst.setString(4, txtGPQtdMin.getText());
             pst.setString(5, txtGPQtdMax.getText());
-            pst.setString(6, txtGPID.getText());
+            //pst.setString(2, comBoxGPCategorias.getSelectedItem().toString());
+            pst.setString(5, txtGPUnidade.getText());
+
+            pst.setString(7, txtGPCategorias.getText());
+            pst.setString(8, txtGPID.getText());
             
-            if((txtGPNomeProduto.getText().isEmpty() ||
-                comBoxGPCategorias.getSelectedItem().toString().startsWith("00 - Selecione")) ||
-                txtGPQtd.getText().isEmpty() ||
-                txtGPQtdMin.getText().isEmpty() ||
-                txtGPQtdMax.getText().isEmpty()) {
+            if((txtGPNomeProduto.getText().isEmpty()) ||
+                (comBoxGPCategorias.getSelectedItem().toString().startsWith("00 - Selecione")) ||
+                (txtGPQtd.getText().isEmpty()) ||
+                (txtGPQtdMin.getText().isEmpty()) ||
+                (txtGPQtdMax.getText().isEmpty())) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos");               
             } else {
                 int adicionado = pst.executeUpdate();
                 
                 if(adicionado > 0){
                     JOptionPane.showMessageDialog(null,"Produto Alterado com Sucesso!");
-                    txtGPID.setText(null);
-                    txtGPNomeProduto.setText(null);  
-                    comBoxGPCategorias.setSelectedIndex(0);
-                    txtGPQtd.setText(null);
-                    txtGPQtdMin.setText(null);
-                    txtGPQtdMax.setText(null);
+                    limparCampos();
                 }
             }
             
@@ -133,19 +76,14 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
                 "atenção", JOptionPane.YES_NO_OPTION);
         
         if(confirma==JOptionPane.YES_OPTION){
-            String sql ="delete from tb_estoques where id=?";
+            String sql ="delete from Produtos where id=?";
             try {
                 pst = conexao.prepareStatement(sql);
                 pst.setString(1,txtGPID.getText());
                 int apagado = pst.executeUpdate();
                 if(apagado > 0){
                     JOptionPane.showMessageDialog(null,"Produto Removido com Sucesso!");
-                    txtGPID.setText(null);
-                    txtGPNomeProduto.setText(null);  
-                    comBoxGPCategorias.setSelectedIndex(0);
-                    txtGPQtd.setText(null);
-                    txtGPQtdMin.setText(null);
-                    txtGPQtdMax.setText(null);
+                    limparCampos();
                 }
                 
             } catch (Exception e) {
@@ -154,6 +92,52 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
         }
         
     }
+    
+    private void pesquisarProduto(){
+        String sql = "SELECT p.id as ID, p.nome as Nome, c.nome AS Categoria, p.preco as Preço, p.unidade_medida as Unidade_de_Medida,p.quantidade as Quantidade,  p.qtd_minima as Quantidade_Minima, p.qtd_maxima as Quantidade_Maxima FROM Produtos p JOIN Categorias c ON p.categoria_id = c.id where p.nome like ?";
+        
+        try {
+            pst = conexao.prepareStatement(sql);
+            
+            //passando o conteudo da caixa de pesquisa para o "?"
+            pst.setString(1, txtGPPesquisar.getText()+"%");
+            rs = pst.executeQuery();
+            
+            //utilizando a biblioteca rs2xml para preencher a tabela
+            tabGP.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    //ao clicar em um campo da tabela, ira preencher os campos da tela
+    public void setarCampos(){
+        int setar = tabGP.getSelectedRow();
+        txtGPID.setText(tabGP.getModel().getValueAt(setar,0).toString());
+        txtGPNomeProduto.setText(tabGP.getModel().getValueAt(setar,1).toString());
+        txtGPCategorias.setText(tabGP.getModel().getValueAt(setar,2).toString());
+        //comBoxGPCategorias.setSelectedItem(tabGP.getModel().getValueAt(setar,2).            toString());
+        txtGPPreco.setText(tabGP.getModel().getValueAt(setar,3).toString());
+        txtGPUnidade.setText(tabGP.getModel().getValueAt(setar,4).toString());
+        txtGPQtd.setText(tabGP.getModel().getValueAt(setar,5).toString());
+        txtGPQtdMin.setText(tabGP.getModel().getValueAt(setar,6).toString());
+        txtGPQtdMax.setText(tabGP.getModel().getValueAt(setar,7).toString());
+        
+    }
+    
+    private void limparCampos(){
+        txtGPID.setText(null);
+        txtGPNomeProduto.setText(null);  
+        comBoxGPCategorias.setSelectedIndex(0);
+        txtGPCategorias.setText(null);
+        txtGPPreco.setText(null);
+        txtGPUnidade.setText(null);
+        txtGPQtd.setText(null);
+        txtGPQtdMin.setText(null);
+        txtGPQtdMax.setText(null);
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -181,7 +165,14 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
         btnGPPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabGP = new javax.swing.JTable();
-        btnGPAdicionar = new javax.swing.JButton();
+        txtGPPesquisar = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtGPPreco = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        txtGPCategorias = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtGPUnidade = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -248,108 +239,152 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
             }
         });
 
+        tabGP = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tabGP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Categoria"
+                "ID", "Nome", "Categoria", "Preço", "Quantidade", "Quantidade Minima", "Quantidade Maxima", "Unidade de Medida"
             }
         ));
         tabGP.setColumnSelectionAllowed(true);
+        tabGP.setFocusable(false);
+        tabGP.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabGP);
         tabGP.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        btnGPAdicionar.setText("Adicionar Produto");
-        btnGPAdicionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGPAdicionarActionPerformed(evt);
+        txtGPPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGPPesquisarKeyReleased(evt);
             }
         });
+
+        jLabel7.setText("Preço:");
+
+        jButton1.setText("Limpar Campos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Unidade de Medida");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(txtGPPesquisar)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnGPPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btnGPDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGPEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(7, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGPQtdMax, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGPQtdMin, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtGPNomeProduto)
-                                    .addComponent(comBoxGPCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtGPQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtGPID)))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnGPDeletar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGPAdicionar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(btnGPPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnGPEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel1)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtGPID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtGPQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtGPQtdMin, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtGPPreco, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(txtGPCategorias))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtGPUnidade)
+                            .addComponent(comBoxGPCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtGPQtdMax)
+                    .addComponent(txtGPNomeProduto, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtGPID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtGPNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(comBoxGPCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtGPQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtGPQtdMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtGPQtdMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGPPesquisar)
-                            .addComponent(btnGPEditar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGPAdicionar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGPDeletar)
-                        .addGap(0, 117, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtGPPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGPPesquisar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtGPID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtGPNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comBoxGPCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtGPCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtGPPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtGPUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtGPQtdMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtGPQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtGPQtdMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGPEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGPDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43))
         );
 
         setBounds(0, 0, 640, 450);
@@ -383,33 +418,50 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
 
     private void btnGPPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGPPesquisarActionPerformed
         // TODO add your handling code here:
-        consultar();
+        pesquisarProduto();
     }//GEN-LAST:event_btnGPPesquisarActionPerformed
 
-    private void btnGPAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGPAdicionarActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        adicionar();
-    }//GEN-LAST:event_btnGPAdicionarActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        limparCampos();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtGPPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGPPesquisarKeyReleased
+        // TODO add your handling code here:
+        pesquisarProduto();
+    }//GEN-LAST:event_txtGPPesquisarKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGPAdicionar;
     private javax.swing.JButton btnGPDeletar;
     private javax.swing.JButton btnGPEditar;
     private javax.swing.JButton btnGPPesquisar;
     private javax.swing.JComboBox<String> comBoxGPCategorias;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabGP;
+    private javax.swing.JTextField txtGPCategorias;
     private javax.swing.JTextField txtGPID;
     private javax.swing.JTextField txtGPNomeProduto;
+    private javax.swing.JTextField txtGPPesquisar;
+    private javax.swing.JTextField txtGPPreco;
     private javax.swing.JTextField txtGPQtd;
     private javax.swing.JTextField txtGPQtdMax;
     private javax.swing.JTextField txtGPQtdMin;
+    private javax.swing.JTextField txtGPUnidade;
     // End of variables declaration//GEN-END:variables
 }
