@@ -144,22 +144,22 @@ public class FormSaidaEstoque extends javax.swing.JFrame {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
         try{
-      int produtoId = Integer.parseInt(campoCodigoProduto.getText());
+      int produto_Id = Integer.parseInt(campoCodigoProduto.getText());
         int quantidade = Integer.parseInt(CampoQuantidade.getText());
-        String observacoes = campoObs.getText().trim();
+        String observacao = campoObs.getText().trim();
          
  if (quantidade <= 0) {
             JOptionPane.showMessageDialog(this, "A quantidade para entrada deve ser maior que zero.", "Erro de Validação", JOptionPane.WARNING_MESSAGE);
             return;
         }
-   // Adicione validação para produtoId, se necessário
-        if (produtoId <= 0) {
+   // Adicione validação para produto_Id, se necessário
+        if (produto_Id <= 0) {
             JOptionPane.showMessageDialog(this, "O ID do Produto deve ser um número válido e positivo.", "Erro de Validação", JOptionPane.WARNING_MESSAGE);
             return;
         }
           String tipoMovimentacao = "SAÍDA"; 
 
-        Movimentacao novaMovimentacao = new Movimentacao(0, produtoId, tipoMovimentacao, quantidade, null, observacoes);
+        Movimentacao novaMovimentacao = new Movimentacao(0, produto_Id, tipoMovimentacao, quantidade, null, observacao);
 
         // 4. Chamar o MovimentacaoDAO para salvar no banco de dados
         boolean sucesso = MovimentacaoDAO.removerEstoque(novaMovimentacao);
