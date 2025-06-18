@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Produto;
-import javax.swing.JOptionPane;
 
 /**
  * @author 
@@ -35,7 +34,6 @@ public class ProdutoDAO {
             return true;
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog( null, "Não foi possível cadastrar o produto: " + e.getMessage());
             System.out.println("Não foi possível cadastrar o produto: " + e.getMessage());
             return false;
         }
