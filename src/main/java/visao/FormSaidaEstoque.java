@@ -155,7 +155,7 @@ public class FormSaidaEstoque extends javax.swing.JFrame {
         String observacoes = campoObs.getText().trim();
          
  if (quantidade <= 0) {
-            JOptionPane.showMessageDialog(this, "A quantidade para entrada deve ser maior que zero.", "Erro de Validação", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "A quantidade para saída deve ser maior que zero.", "Erro de Validação", JOptionPane.WARNING_MESSAGE);
             return;
         }
    // Adicione validação para produtoId, se necessário
@@ -171,7 +171,7 @@ public class FormSaidaEstoque extends javax.swing.JFrame {
         boolean sucesso = MovimentacaoDAO.removerEstoque(novaMovimentacao);
 
         if (sucesso) {
-            JOptionPane.showMessageDialog(this, "Entrada de estoque registrada com sucesso!");
+            JOptionPane.showMessageDialog(this, "Saída de estoque registrada com sucesso!");
 
             // Opcional: Limpar campos após o sucesso
         campoCodigoProduto.setText("");
@@ -184,7 +184,7 @@ public class FormSaidaEstoque extends javax.swing.JFrame {
 
 } catch (NumberFormatException ex) {
     // Captura erro se o texto nos campos não for um número válido
-    JOptionPane.showMessageDialog(this, "Erro: ID do Produto e Quantidade devem ser números válidos.", "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(this, "Erro: ID do Produto e Quantidade devem ser números válidos.", "Erro de saida", JOptionPane.ERROR_MESSAGE);
 
             ex.printStackTrace();
         } catch (SQLException e) { //  Bloco catch para exceções de SQL (banco de dados)
