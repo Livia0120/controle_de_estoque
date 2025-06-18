@@ -9,7 +9,7 @@ import dao.ProdutoDAO;
 import java.util.List;
 import modelo.Categoria;
 import modelo.Produto;
-import visao.FormMenuPrincipal;
+import visao.MenuPrincipal;
 
 /**
  *
@@ -20,7 +20,7 @@ public class Principal {
            
 
         
-        FormMenuPrincipal objetoScreen = new FormMenuPrincipal(); // Instancia a interface gráfica
+        MenuPrincipal objetoScreen = new MenuPrincipal(); // Instancia a interface gráfica
         objetoScreen.setVisible(true); // Torna a janela visível
 }
     
