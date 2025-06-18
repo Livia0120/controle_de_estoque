@@ -1,11 +1,12 @@
 
 package visao;
 
-import java.sql;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import dao.ModuloConexao;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -18,43 +19,52 @@ public class FormRelatorioMinimo extends javax.swing.JFrame {
     public FormRelatorioMinimo() {
         initComponents();
         setDefaultCloseOperation(FormRelatorioMinimo.DISPOSE_ON_CLOSE);
+        carregarProdutos();
+        
     }
+    private void carregarProdutos() {
+    DefaultTableModel modelo = (DefaultTableModel) tblMinimo.getModel();
+    modelo.setRowCount(0);
 
-   private void minimoProdutos(){
-         Connection conexao = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    String sql = "SELECT nome, quantidade, qtd_minima FROM produtos WHERE quantidade < qtd_minima";
 
+    try {
         conexao = ModuloConexao.conector();
-        try{
+        pst = conexao.prepareStatement(sql);
         rs = pst.executeQuery();
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
-                }
-    }
-    private void carregarDadosEstoque() {
 
-    DefaultTableModel modeloMaximo = (DefaultTableModel) tblMinimo.getModel(); 
-    modeloMaximo.setRowCount(0);
-
-    try (Connection conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/controle_de_estoque", "root", "48991385316Gu.");
-         Statement stmt = conexao.createStatement();
-         ResultSet rs = stmt.executeQuery("SELECT nome, quantidade, qtd_maxima FROM controle_de_estoque where quantidade > qtd_maxima")) {
         while (rs.next()) {
             String nome = rs.getString("nome");
             int quantidade = rs.getInt("quantidade");
-            int qtdMaxima = rs.getInt("qtd_maxima");
-
-            // Adiciona uma nova linha ao modelo da tabela
-            modeloMaximo.addRow(new Object[]{nome, quantidade, qtdMaxima});
+            int qtdMinima = rs.getInt("qtd_minima");
+            modelo.addRow(new Object[]{nome, quantidade, qtdMinima});
         }
     } catch (SQLException e) {
-
-        JOptionPane.showMessageDialog(this, "Erro ao carregar dados: " + e.getMessage(), "Erro de Banco de Dados", JOptionPane.ERROR_MESSAGE);
-
-        e.printStackTrace();
+        JOptionPane.showMessageDialog(this,
+                "Erro ao carregar produtos abaixo do limite mínimo: " + e.getMessage(),
+                "Erro no Banco de Dados", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pst != null) {
+                pst.close();
+            }
+            if (conexao != null) {
+                conexao.close();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro ao fechar recursos do banco de dados: " + e.getMessage(),
+                    "Erro de Fechamento", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -75,7 +85,7 @@ public class FormRelatorioMinimo extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Nome", "Quantidade", "Quantidade Máxima"
+                "Nome", "Quantidade", "Quantidade Minima"
             }
         ));
         jScrollPane1.setViewportView(tblMinimo);
@@ -113,12 +123,11 @@ public class FormRelatorioMinimo extends javax.swing.JFrame {
             public void run() {
                 new FormRelatorioMinimo().setVisible(true);
             }
-        });
-    }
-    
+            });
+        }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblMinimo;
     // End of variables declaration//GEN-END:variables
-}
+        }

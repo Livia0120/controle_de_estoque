@@ -1,60 +1,68 @@
-
 package visao;
 
-import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import dao.ModuloConexao;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author gusta
  */
 public class FormRelatorioMaximo extends javax.swing.JFrame {
-    
-
 
     public FormRelatorioMaximo() {
         initComponents();
         setDefaultCloseOperation(FormRelatorioMaximo.DISPOSE_ON_CLOSE);
+        carregarProdutos();
     }
-    private void maximoProdutos(){
-         Connection conexao = null;
+
+    private void carregarProdutos() {
+        DefaultTableModel modelo = (DefaultTableModel) tblMaximo.getModel();
+        modelo.setRowCount(0);
+
+        Connection conexao = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        conexao = ModuloConexao.conector();
-        
-        try{
-        rs = pst.executeQuery();
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
+        String sql = "SELECT nome, quantidade, qtd_maxima FROM produtos WHERE quantidade > qtd_maxima";
+
+        try {
+            conexao = ModuloConexao.conector();
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String nome = rs.getString("nome");
+                int quantidade = rs.getInt("quantidade");
+                int qtdMaxima = rs.getInt("qtd_maxima");
+                modelo.addRow(new Object[]{nome, quantidade, qtdMaxima});
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro ao carregar produtos acima do limite máximo: " + e.getMessage(),
+                    "Erro de Banco de Dados", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
                 }
-    }
-    private void carregarDadosEstoque() {
-
-   
-    DefaultTableModel modeloMaximo = (DefaultTableModel) tblMaximo.getModel(); 
-    modeloMaximo.setRowCount(0);
-
-    try (Connection conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/controle_de_estoque", "root", "48991385316Gu.");
-         Statement stmt = conexao.createStatement();
-         ResultSet rs = stmt.executeQuery("SELECT nome, quantidade, qtd_maxima FROM controle_de_estoque where quantidade > qtd_maxima")) {
-        while (rs.next()) {
-
-            String nome = rs.getString("nome");
-            int quantidade = rs.getInt("quantidade");
-            int qtdMaxima = rs.getInt("qtd_maxima");
-
-            // Adiciona uma nova linha ao modelo da tabela
-            modeloMaximo.addRow(new Object[]{nome, quantidade, qtdMaxima});
+                if (pst != null) {
+                    pst.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this,
+                        "Erro ao fechar recursos do banco de dados: " + e.getMessage(),
+                        "Erro de Fechamento", JOptionPane.ERROR_MESSAGE);
+            }
         }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Erro ao carregar dados: " + e.getMessage(), "Erro de Banco de Dados", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
     }
-}
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
