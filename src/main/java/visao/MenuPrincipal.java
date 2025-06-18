@@ -271,7 +271,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void menRelBalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelBalActionPerformed
         // TODO add your handling code here:
-        FormRelatBalanco objeto = new FormRelatBalanco();
+        FormRelatorioBalancoFisico objeto = new FormRelatorioBalancoFisico();
         objeto.setVisible(true);
     }//GEN-LAST:event_menRelBalActionPerformed
 
