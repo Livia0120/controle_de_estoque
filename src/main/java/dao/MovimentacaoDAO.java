@@ -25,10 +25,10 @@ public class MovimentacaoDAO {
             conexao = ModuloConexao.conector();
             if (conexao != null) {
                 pst = conexao.prepareStatement(sql);
-                 pst.setInt(1, m.getProdutoId());
+                 pst.setInt(1, m.getProduto_Id());
                 pst.setString(2, "entrada"); 
                 pst.setInt(3, m.getQuantidade());
-                pst.setString(4, m.getObservacoes() );
+                pst.setString(4, m.getObservacao() );
 
                 int linhasAfetadas = pst.executeUpdate();
                 if (linhasAfetadas > 0) {
@@ -72,32 +72,32 @@ public class MovimentacaoDAO {
                 // 1. Atualiza o estoque do produto
                 pstAtualiza = conexao.prepareStatement(sqlAtualizaEstoque);
                 pstAtualiza.setInt(1, m.getQuantidade());
-                pstAtualiza.setInt(2, m.getProdutoId());
+                pstAtualiza.setInt(2, m.getProduto_Id());
 
                 int linhasAfetadasAtualizacao = pstAtualiza.executeUpdate();
 
                 if (linhasAfetadasAtualizacao > 0) {
-                    System.out.println("Estoque do produto ID " + m.getProdutoId() + " atualizado.");
+                    System.out.println("Estoque do produto ID " + m.getProduto_Id() + " atualizado.");
 
                     // 2. Registra a movimentação de saída
                     pstRegistra = conexao.prepareStatement(sqlRegistraMovimentacao);
-                    pstRegistra.setInt(1, m.getProdutoId());
+                    pstRegistra.setInt(1, m.getProduto_Id());
                     pstRegistra.setString(2, "saida"); // Tipo 'saida'
                     pstRegistra.setInt(3, m.getQuantidade());
-                    pstRegistra.setString(4, m.getObservacoes());
+                    pstRegistra.setString(4, m.getObservacao());
 
                     int linhasAfetadasRegistro = pstRegistra.executeUpdate();
 
                     if (linhasAfetadasRegistro > 0) {
-                        System.out.println("Movimentação de saída registrada com sucesso para o produto ID: " + m.getProdutoId());
+                        System.out.println("Movimentação de saída registrada com sucesso para o produto ID: " + m.getProduto_Id());
                         conexao.commit(); // Confirma as duas operações se ambas foram bem-sucedidas
                         sucesso = true;
                     } else {
-                        System.out.println("Falha ao registrar movimentação de saída para o produto ID: " + m.getProdutoId());
+                        System.out.println("Falha ao registrar movimentação de saída para o produto ID: " + m.getProduto_Id());
                         conexao.rollback(); // Desfaz a atualização do estoque se o registro da movimentação falhar
                     }
                 } else {
-                    System.out.println("Nenhuma atualização de estoque para o produto ID: " + m.getProdutoId() + " (produto não encontrado ou quantidade insuficiente).");
+                    System.out.println("Nenhuma atualização de estoque para o produto ID: " + m.getProduto_Id() + " (produto não encontrado ou quantidade insuficiente).");
                     conexao.rollback(); // Desfaz qualquer alteração se a atualização do estoque falhar
                 }
             }

@@ -11,23 +11,23 @@ import java.sql.Timestamp;
  */
 public class Movimentacao {
     private int id;
-    private int produtoId;
+    private int produto_Id;
     private String tipo; 
     private int quantidade;
-    private Timestamp dataMovimentacao; 
-    private String observacoes;
+    private Timestamp data_Movimentacao; 
+    private String observacao;
 
     public Movimentacao() {
         this(0, 0, "", 0, null, "");
     }
         
-    public Movimentacao(int id, int produtoId, String tipo, int quantidade, Timestamp dataMovimentacao, String observacoes) {
+    public Movimentacao(int id, int produto_Id, String tipo, int quantidade, Timestamp data_Movimentacao, String observacoes) {
         this.id = id;
-        this.produtoId = produtoId;
+        this.produto_Id = produto_Id;
         this.tipo = tipo;
         this.quantidade = quantidade;
-        this.dataMovimentacao = dataMovimentacao;
-        this.observacoes = observacoes;
+        this.data_Movimentacao = data_Movimentacao;
+        this.observacao = observacoes;
     }
 
     public int getId() {
@@ -38,12 +38,12 @@ public class Movimentacao {
         this.id = id;
     }
 
-    public int getProdutoId() {
-        return produtoId;
+    public int getProduto_Id() {
+        return produto_Id;
     }
 
-    public void setProdutoId(int produtoId) {
-        this.produtoId = produtoId;
+    public void setProduto_Id(int produto_Id) {
+        this.produto_Id = produto_Id;
     }
 
     public String getTipo() {
@@ -62,43 +62,43 @@ public class Movimentacao {
         this.quantidade = quantidade;
     }
 
-    public Timestamp getDataMovimentacao() {
-        return dataMovimentacao;
+    public Timestamp getData_Movimentacao() {
+        return data_Movimentacao;
     }
 
-    public void setDataMovimentacao(Timestamp dataMovimentacao) {
-        this.dataMovimentacao = dataMovimentacao;
+    public void setData_Movimentacao(Timestamp data_Movimentacao) {
+        this.data_Movimentacao = data_Movimentacao;
     }
 
-    public String getObservacoes() {
-        return observacoes;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
  
-    public boolean adicionarEstoque(int id, int produtoId, String tipo, int quantidade, Timestamp dataMovimentacao, String observacoes) throws SQLException {
+    public boolean adicionarEstoque(int id, int produto_Id, String tipo, int quantidade, Timestamp data_Movimentacao, String observacoes) throws SQLException {
         Movimentacao movimentacao = new Movimentacao();
         movimentacao.setId(id);
-        movimentacao.setProdutoId(produtoId);
+        movimentacao.setProduto_Id(produto_Id);
         movimentacao.setTipo(tipo);
         movimentacao.setQuantidade(quantidade);
-        movimentacao.setDataMovimentacao(dataMovimentacao);
-        movimentacao.setObservacoes(observacoes);
+        movimentacao.setData_Movimentacao(data_Movimentacao);
+        movimentacao.setObservacao(observacoes);
 
         return MovimentacaoDAO.adicionarEstoque(movimentacao);
 
     }
 
-    public boolean removerEstoque(int id, int produtoId, String tipo, int quantidade, Timestamp dataMovimentacao, String observacoes) throws SQLException {
+    public boolean removerEstoque(int id, int produto_Id, String tipo, int quantidade, Timestamp data_Movimentacao, String observacoes) throws SQLException {
         Movimentacao movimentacao = new Movimentacao();
         movimentacao.setId(id);
-        movimentacao.setProdutoId(produtoId);
+        movimentacao.setProduto_Id(produto_Id);
         movimentacao.setTipo(tipo);
         movimentacao.setQuantidade(quantidade);
-        movimentacao.setDataMovimentacao(dataMovimentacao);
-        movimentacao.setObservacoes(observacoes);
+        movimentacao.setData_Movimentacao(data_Movimentacao);
+        movimentacao.setObservacao(observacoes);
 
         return MovimentacaoDAO.removerEstoque(movimentacao);
     }
