@@ -1,0 +1,54 @@
+crud
+
+    categoria 
+        - c [x]
+        - r [x]
+            - id [x]
+            
+        - u [x]
+        - d [x]
+
+    produto 
+        - c [x]
+        - r [x]
+            - id [x]
+        - u [x]
+        - d [x]
+
+
+
+    movimentacao
+        - c [x] // vou fazer verificação se o produto existe e se é possivel adicionar ou diminiuir a quantidade
+            - entrada [x]
+            - saida [x]
+        - r [x]0
+            - id [x]
+        - u [x]
+        - d [x]
+
+
+visualisação
+
+    categoria 
+        - c [x]
+        - r [x]
+            - id []
+        - u [x]
+        - d [x]
+
+
+    produto
+        - c [x]
+        - r []
+            - id []
+        - u []
+        - d []
+
+
+    movimentacao
+        - c []
+        - r []
+            - id []
+        - u []
+        - d []
+

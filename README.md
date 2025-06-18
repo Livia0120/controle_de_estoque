@@ -27,15 +27,23 @@ Sistema desenvolvido com a finalidade de gerenciar estoque, podendo o usuário c
 
 ## 👨‍💻Participantes
 ```javascript
-| Nome:                      | user:              | RA:         |            
-|----------------------------|                    |-------------|
-| Ana Luiza Seemann Felisbino| AnaLuiza2412       | 10724268572 | 
-| Beatriz Arevalo Freitas    | biaArevaloFreitas  | 10725115625 |
-| Gustavo Godinho            | gustavo-godinho    | 10724268995 | 
-| Lívia de Oliveira          | Livia0120          | 10725115228 |
-| Vitor Steinbach            | steinbachvitor     | 10724268585 | 
+| Nome:                         | RA:         |      
+|-------------------------------|-------------|
+| Ana Luiza Seemann Felisbino   | 10724268572 | 
+| Beatriz Arevalo Freitas       | 10725115625 |
+| Gustavo Godinho               | 10724268995 | 
+| Lívia de Oliveira             | 10725115228 |
+| Vitor Steinbach               | 10724268585 | 
 
 ```
+
+#### GitHub
+[AnaLuiza2412](https://github.com/AnaLuiza2412)  
+[biaArevaloFreitas](https://github.com/biaArevaloFreitas)    
+[Gustavo Godinho](https://github.com/gustavo-godinho)        
+[Livia0120](https://github.com/Livia0120)    
+[steinbachvitor](https://github.com/steinbachvitor) 
+     
 
 
 ## 🛠 Tecnologias utilizadas

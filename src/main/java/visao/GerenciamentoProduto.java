@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ */
 package visao;
 
 /**
@@ -6,18 +9,17 @@ package visao;
  * @author Vitor
  */
 
-
+import java.sql.*;
 import dao.ModuloConexao;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 
 public class GerenciamentoProduto extends javax.swing.JInternalFrame {
 
-
+    /**
+     * Creates new form GerenciamentoProduto
+     */
     Connection conexao;
     PreparedStatement pst;
     ResultSet rs;
