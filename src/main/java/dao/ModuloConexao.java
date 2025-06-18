@@ -15,7 +15,7 @@ public class ModuloConexao {
       String url = "jdbc:mysql://127.0.0.1:3306/controle_de_estoque";
       String user = "root";
 
-      String password = ""; 
+      String password = "root"; 
        //String password = "1Qaz2wsx@"; 
 
       try{
