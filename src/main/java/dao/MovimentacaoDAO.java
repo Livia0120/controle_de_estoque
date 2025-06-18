@@ -60,7 +60,7 @@ public class MovimentacaoDAO {
 
                 int linhasAfetadas = pst.executeUpdate();
                 if (linhasAfetadas > 0) {
-
+                    sucesso = true;
                     System.out.println("Movimentação registrada com sucesso ");
                 } else {
                     System.out.println("Falha ao registrar movimentação  ");
@@ -78,7 +78,7 @@ public class MovimentacaoDAO {
                 System.err.println("Erro ao fechar PreparedStatement: " + e.getMessage());
             }
         }
-        return false;
+        return sucesso;
     }
 
     // Método para saída de estoque
@@ -127,10 +127,11 @@ public class MovimentacaoDAO {
                     int linhasAfetadasRegistro = pstRegistra.executeUpdate();
 
                     if (linhasAfetadasRegistro > 0) {
+                        sucesso = true;
                         System.out.println(
                                 "Movimentação de saída registrada com sucesso para o produto ID: " + m.getProdutoId());
                         conexao.commit(); // Confirma as duas operações se ambas foram bem-sucedidas
-                        sucesso = true;
+                        
                     } else {
                         System.out.println(
                                 "Falha ao registrar movimentação de saída para o produto ID: " + m.getProdutoId());
