@@ -29,18 +29,18 @@ public class FormRelatorioListadePreco extends javax.swing.JFrame {
         Connection conexao = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        String sql = "SELECT nome, preco, unidade_medida, categoria_id FROM produtos";
+        String sql = "SELECT p.nome as NomeDoProduto, p.preco as preco, p.unidade_medida AS UnidadeDeMedida, c.nome as NomeDaCategoria FROM produtos p JOIN categorias c ON p.categoria_id = c.id";
         try {
             conexao = ModuloConexao.conector();
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                String nome = rs.getString("nome");
+                String nome = rs.getString("NomeDoProduto");
                 double preco = rs.getDouble("preco");
-                String unidade_medida = rs.getString("unidade_medida");
-                int categoria_id = rs.getInt("categoria_id");
-                modelo.addRow(new Object[]{nome, preco, unidade_medida, categoria_id});
+                String unidade_medida = rs.getString("UnidadeDeMedida");
+                String categoria_nome = rs.getString("NomeDaCategoria");
+                modelo.addRow(new Object[]{nome, preco, unidade_medida, categoria_nome});
             }
         } catch (SQLException e) {
            
@@ -97,7 +97,7 @@ public class FormRelatorioListadePreco extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblListadePrecos);
 
-        jLabel1.setText("Listta de Preços dos Produtos");
+        jLabel1.setText("Lista de Preços dos Produtos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

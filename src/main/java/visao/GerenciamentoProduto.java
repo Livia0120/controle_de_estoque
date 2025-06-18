@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package visao;
 
 /**
@@ -11,6 +8,7 @@ package visao;
 
 import java.sql.*;
 import dao.ModuloConexao;
+import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -33,6 +31,7 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
 
         conexao = ModuloConexao.conector();
         pesquisarProduto();
+        adicionarItensLista();
         
     }
       
@@ -46,14 +45,13 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
             pst.setString(3, txtGPPreco.getText());
             pst.setString(4, txtGPQtdMin.getText());
             pst.setString(5, txtGPQtdMax.getText());
-            //pst.setString(2, comBoxGPCategorias.getSelectedItem().toString());
-            pst.setString(5, txtGPUnidade.getText());
-
-            pst.setString(7, txtGPCategorias.getText());
+           
+            pst.setString(6, txtGPUnidade.getText());
+            pst.setString(7, comBoxGPCategorias.getSelectedItem().toString());
             pst.setString(8, txtGPID.getText());
             
             if((txtGPNomeProduto.getText().isEmpty()) ||
-                (comBoxGPCategorias.getSelectedItem().toString().startsWith("00 - Selecione")) ||
+                (comBoxGPCategorias.getSelectedIndex() ==0) ||
                 (txtGPQtd.getText().isEmpty()) ||
                 (txtGPQtdMin.getText().isEmpty()) ||
                 (txtGPQtdMax.getText().isEmpty())) {
@@ -118,8 +116,7 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
         int setar = tabGP.getSelectedRow();
         txtGPID.setText(tabGP.getModel().getValueAt(setar,0).toString());
         txtGPNomeProduto.setText(tabGP.getModel().getValueAt(setar,1).toString());
-        txtGPCategorias.setText(tabGP.getModel().getValueAt(setar,2).toString());
-        //comBoxGPCategorias.setSelectedItem(tabGP.getModel().getValueAt(setar,2).            toString());
+        comBoxGPCategorias.setSelectedItem(tabGP.getModel().getValueAt(setar,2).            toString());
         txtGPPreco.setText(tabGP.getModel().getValueAt(setar,3).toString());
         txtGPUnidade.setText(tabGP.getModel().getValueAt(setar,4).toString());
         txtGPQtd.setText(tabGP.getModel().getValueAt(setar,5).toString());
@@ -132,14 +129,29 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
         txtGPID.setText(null);
         txtGPNomeProduto.setText(null);  
         comBoxGPCategorias.setSelectedIndex(0);
-        txtGPCategorias.setText(null);
         txtGPPreco.setText(null);
         txtGPUnidade.setText(null);
         txtGPQtd.setText(null);
         txtGPQtdMin.setText(null);
         txtGPQtdMax.setText(null);
     }
-    
+    private void adicionarItensLista(){
+	String sql = "SELECT nome FROM categorias";
+        PreparedStatement stmt;
+        try {
+      
+            stmt = conexao.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+        	String nomeCategoria = rs.getString("nome");
+        	comBoxGPCategorias.addItem(nomeCategoria);
+        }
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null,ex);
+        }
+        
+}
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -172,7 +184,6 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
         txtGPPreco = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        txtGPCategorias = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtGPUnidade = new javax.swing.JTextField();
 
@@ -195,6 +206,9 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Quantidade Mínima:");
 
+        txtGPID.setEditable(false);
+        txtGPID.setEnabled(false);
+
         txtGPNomeProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGPNomeProdutoActionPerformed(evt);
@@ -213,7 +227,7 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
             }
         });
 
-        comBoxGPCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00 - Selecione", "01 - Alimentos Perecíveis", "02 - Alimentos Não Perecíveis", "03 - Bazar e Utilidades", "04 - Bebidas", "05 - Congelados", "06 - Higiene Pessoal", "07 - Limpeza e Utilidades Domésticas", "08 - Mercearia", "09 - Padaria e Confeitaria", "10 - Pet Shop" }));
+        comBoxGPCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
         comBoxGPCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comBoxGPCategoriasActionPerformed(evt);
@@ -260,6 +274,11 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
         tabGP.setColumnSelectionAllowed(true);
         tabGP.setFocusable(false);
         tabGP.getTableHeader().setReorderingAllowed(false);
+        tabGP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabGPMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabGP);
         tabGP.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -293,56 +312,59 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(txtGPPesquisar)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnGPPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel4))
+                                .addGap(41, 41, 41))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtGPID, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtGPQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtGPQtdMin, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(txtGPPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtGPUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtGPQtdMax)
+                            .addComponent(txtGPNomeProduto, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(comBoxGPCategorias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(txtGPPesquisar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnGPPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 1, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(btnGPDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnGPEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(7, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(6, 6, 6)
-                        .addComponent(txtGPID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtGPQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtGPQtdMin, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtGPPreco, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                            .addComponent(txtGPCategorias))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtGPUnidade)
-                            .addComponent(comBoxGPCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txtGPQtdMax)
-                    .addComponent(txtGPNomeProduto, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,7 +374,7 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
                     .addComponent(txtGPPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGPPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -362,8 +384,7 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comBoxGPCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtGPCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtGPPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -386,7 +407,7 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
                     .addComponent(btnGPEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGPDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
+                .addGap(71, 71, 71))
         );
 
         setBounds(0, 0, 640, 450);
@@ -438,6 +459,10 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
         pesquisarProduto();
     }//GEN-LAST:event_txtGPPesquisarKeyReleased
 
+    private void tabGPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabGPMouseClicked
+        setarCampos();
+    }//GEN-LAST:event_tabGPMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGPDeletar;
@@ -456,7 +481,6 @@ public class GerenciamentoProduto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabGP;
-    private javax.swing.JTextField txtGPCategorias;
     private javax.swing.JTextField txtGPID;
     private javax.swing.JTextField txtGPNomeProduto;
     private javax.swing.JTextField txtGPPesquisar;

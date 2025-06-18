@@ -133,7 +133,7 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemCadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroProdutoActionPerformed
-        FormCadastroProd objeto = new FormCadastroProd();
+        FormCadastrodeProdutos objeto = new FormCadastrodeProdutos();
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroProdutoActionPerformed
 
@@ -148,8 +148,7 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRelatBalancoActionPerformed
 
     private void jMenuItemCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroCategoriaActionPerformed
-        FormCategoria objeto = new FormCategoria();
-        objeto.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItemCadastroCategoriaActionPerformed
 
     private void jMenuItemSaidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaidasActionPerformed
