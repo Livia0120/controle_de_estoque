@@ -2,7 +2,6 @@ visao\FormCategoria.class
 visao\FormMenuPrincipal$6.class
 visao\MenuPrincipal$2.class
 visao\GerenciamentoProduto$7.class
-visao\MenuPrincipal$9.class
 visao\MenuPrincipal$5.class
 visao\FormCategoria$4.class
 visao\FormMenuPrincipal$9.class
@@ -13,6 +12,7 @@ dao\ModuloConexao.class
 visao\MenuPrincipal$8.class
 visao\FormMenuPrincipal.class
 modelo\Movimentacao.class
+visao\FormRelatorioListadePreco$1.class
 visao\FormEntradaEstoque$1.class
 visao\FormCadastrodeProduto$3.class
 dao\ProdutoDAO.class
@@ -29,19 +29,18 @@ visao\FormSaidaEstoque$2.class
 visao\FormRelatorioMinimo$1.class
 visao\FormCategoria$3.class
 visao\GerenciamentoProduto$1.class
-visao\RelatListaPreco.class
 visao\FormMenuPrincipal$3.class
 visao\FormRelatorioMaximo$1.class
 visao\MenuPrincipal$7.class
 visao\GerenciamentoProduto$5.class
 visao\FormSaidaEstoque$4.class
+visao\FormRelatorioListadePreco$2.class
 visao\FormEntradaEstoque$5.class
 visao\FormRelatorioBalancoFisico$1.class
 visao\FormRelatorioBalancoFisico.class
 visao\FormEntradaEstoque.class
 visao\FormMenuPrincipal$1.class
 visao\GerenciamentoProduto$2.class
-visao\RelatListaPreco$1.class
 visao\FormMenuPrincipal$4.class
 visao\FormMenuPrincipal$7.class
 visao\FormCategoria$2.class
@@ -64,5 +63,6 @@ visao\GerenciamentoProduto.class
 visao\FormEntradaEstoque$3.class
 visao\FormCadastrodeProduto$2.class
 visao\FormCategoria$1.class
+visao\FormRelatorioListadePreco.class
 principal\Principal.class
 visao\FormMenuPrincipal$8.class

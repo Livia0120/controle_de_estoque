@@ -151,11 +151,6 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroProdutoActionPerformed
 
-    private void jMenuItemRelatListaPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatListaPrecoActionPerformed
-        RelatListaPreco objeto = new RelatListaPreco();
-        objeto.setVisible(true);
-    }//GEN-LAST:event_jMenuItemRelatListaPrecoActionPerformed
-
     private void jMenuItemRelatBalancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatBalancoActionPerformed
        FormRelatorioBalancoFisico objeto = new FormRelatorioBalancoFisico();
        objeto.setVisible(true);
@@ -189,6 +184,11 @@ public class FormMenuPrincipal extends javax.swing.JFrame {
         FormRelatorioMinimo objeto = new FormRelatorioMinimo();
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatMinimaActionPerformed
+
+    private void jMenuItemRelatListaPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatListaPrecoActionPerformed
+       FormRelatorioListadePreco objeto = new FormRelatorioListadePreco();
+       objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemRelatListaPrecoActionPerformed
 
 
     public static void main(String args[]) {

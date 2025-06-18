@@ -111,11 +111,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         menRel.setText("Relatórios");
 
         menRelLis.setText("Lista de Preços");
-        menRelLis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menRelLisActionPerformed(evt);
-            }
-        });
         menRel.add(menRelLis);
 
         menRelBal.setText("Balanço Físico e Financeiro");
@@ -188,11 +183,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         //Menu.add(objeto);
         desktop.add(objeto);
     }//GEN-LAST:event_menCadGPActionPerformed
-
-    private void menRelLisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelLisActionPerformed
-        RelatListaPreco objeto = new RelatListaPreco();
-        objeto.setVisible(true);
-    }//GEN-LAST:event_menRelLisActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
