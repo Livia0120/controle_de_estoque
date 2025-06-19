@@ -114,6 +114,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuRelatorioProdutosPorCategoriaActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="MenuPrincipal_MenuRelatorioProdutosPorCategoria"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -29,6 +29,7 @@ public class FormRelatorioProdutosPorCategoria extends javax.swing.JFrame {
         Connection conexao = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
+        // O SELECT abaixo faz com que as quantidades já sejam somadas referentes a cada categoria
         String sql = "SELECT c.nome as NomeDaCategoria, SUM(p.quantidade) as QuantidadeTotal FROM produtos p JOIN categorias c ON p.categoria_id = c.id GROUP BY c.nome";
         try {
             conexao = ModuloConexao.conector();
@@ -45,6 +46,7 @@ public class FormRelatorioProdutosPorCategoria extends javax.swing.JFrame {
                     "Erro ao carregar produtos do banco de dados: " + e.getMessage(),
                     "Erro de Banco de Dados", JOptionPane.ERROR_MESSAGE);
         }finally {
+            // O try abaixo garante que o programa feche devidamente se ocorrer algum problema durante a execução do programa
             try {
                 if (rs != null) {
                     rs.close();
@@ -62,7 +64,6 @@ public class FormRelatorioProdutosPorCategoria extends javax.swing.JFrame {
             }
         }
     }
-    
  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

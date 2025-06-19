@@ -19,7 +19,7 @@ public class FormRelatorioMaximo extends javax.swing.JFrame {
         setDefaultCloseOperation(FormRelatorioMaximo.DISPOSE_ON_CLOSE);
         carregarProdutos();
     }
-
+    //O método abaixo carrega os dados do banco enquanto prepara a conexão com o banco de dados
     private void carregarProdutos() {
         DefaultTableModel modelo = (DefaultTableModel) tblMaximo.getModel();
         modelo.setRowCount(0);
@@ -33,7 +33,7 @@ public class FormRelatorioMaximo extends javax.swing.JFrame {
             conexao = ModuloConexao.conector();
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-
+            //O While pega os dados do banco com Get e adiciona uma nova linha na tabela com os dados
             while (rs.next()) {
                 String nome = rs.getString("nome");
                 int quantidade = rs.getInt("quantidade");

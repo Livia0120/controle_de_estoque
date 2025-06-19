@@ -15,17 +15,17 @@ import javax.swing.JTable;
  * @author Ana Luiza
  */
 public class FormRelatorioBalancoFisico extends javax.swing.JFrame {
-
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormRelatorioBalancoFisico.class.getName());
     
-
+    //O método abaixo é o construtor da classe
     public FormRelatorioBalancoFisico() {
         initComponents();
         carregarProdutos();
         setDefaultCloseOperation(FormRelatorioBalancoFisico.DISPOSE_ON_CLOSE);
         JTable tblProdutos = new JTable();
     }
-
+    //O método abaixo carrega os dados nome, quantidade e preço do banco de dados, além de quantificar o valorTotal do estoque. E também
+    //adiciona esses dados nas linhas da tabela enquanto realiza a conexão com o banco de dados
     private void carregarProdutos() {
         try (Connection conexao = ModuloConexao.conector(); PreparedStatement pst = conexao.prepareStatement(
                 "SELECT nome, quantidade, preco FROM produtos"
@@ -73,14 +73,14 @@ public class FormRelatorioBalancoFisico extends javax.swing.JFrame {
                     }
                 }
             });
-               
+            
             lblTotalEstoque.setText("Valor Total do Estoque: R$ " + String.format("%.2f", totalEstoque));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao carregar produtos: " + e.getMessage());
         }
     }
-
+    //O método abaixo insere na JLabel o valor da soma de TODOS os produtos em estoque
     private void atualizarTotalEstoque() {
         double totalEstoque = 0.0;
         DefaultTableModel modelo = (DefaultTableModel) tblProdutos.getModel();

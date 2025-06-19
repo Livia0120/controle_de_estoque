@@ -22,6 +22,7 @@ public class FormRelatorioMinimo extends javax.swing.JFrame {
         carregarProdutos();
         
     }
+    //O método abaixo carrega os dados do banco enquanto prepara a conexão com o banco de dados
     private void carregarProdutos() {
     DefaultTableModel modelo = (DefaultTableModel) tblMinimo.getModel();
     modelo.setRowCount(0);
@@ -47,6 +48,7 @@ public class FormRelatorioMinimo extends javax.swing.JFrame {
                 "Erro ao carregar produtos abaixo do limite mínimo: " + e.getMessage(),
                 "Erro no Banco de Dados", JOptionPane.ERROR_MESSAGE);
     } finally {
+        // O try abaixo garante que o programa feche devidamente se ocorrer algum problema durante a execução do programa
         try {
             if (rs != null) {
                 rs.close();

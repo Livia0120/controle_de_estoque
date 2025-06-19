@@ -21,7 +21,7 @@ public class FormRelatorioListadePreco extends javax.swing.JFrame {
         setDefaultCloseOperation(FormRelatorioListadePreco.DISPOSE_ON_CLOSE);
         carregarProdutos();
     }
-
+    //O método abaixo carrega os dados do banco enquanto prepara a conexão com o banco de dados
     private void carregarProdutos() {
         DefaultTableModel modelo = (DefaultTableModel) tblListadePrecos.getModel();
         modelo.setRowCount(0);
@@ -29,12 +29,13 @@ public class FormRelatorioListadePreco extends javax.swing.JFrame {
         Connection conexao = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
+        //O select altera os nomes para poder utilizar os varchar nome da tabela produtos e também da tabela categoria sem gerar nenhum conflito
         String sql = "SELECT p.nome as NomeDoProduto, p.preco as preco, p.unidade_medida AS UnidadeDeMedida, c.nome as NomeDaCategoria FROM produtos p JOIN categorias c ON p.categoria_id = c.id";
         try {
             conexao = ModuloConexao.conector();
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-
+            //Esse while está pegando os valores dos dados do banco e inserindo nas linhas da tabela
             while (rs.next()) {
                 String nome = rs.getString("NomeDoProduto");
                 double preco = rs.getDouble("preco");
@@ -48,6 +49,7 @@ public class FormRelatorioListadePreco extends javax.swing.JFrame {
                     "Erro ao carregar produtos do banco de dados: " + e.getMessage(),
                     "Erro de Banco de Dados", JOptionPane.ERROR_MESSAGE);
         }finally {
+            // O try abaixo garante que o programa feche devidamente se ocorrer algum problema durante a execução do programa
             try {
                 if (rs != null) {
                     rs.close();
