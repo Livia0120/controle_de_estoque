@@ -27,25 +27,17 @@ Sistema desenvolvido com a finalidade de gerenciar estoque, podendo o usuário c
 
 ## 👨‍💻Participantes
 ```javascript
-| Nome:                         | RA:         |      
-|-------------------------------|-------------|
-| Ana Luiza Seemann Felisbino   | 10724268572 | 
-| Beatriz Arevalo Freitas       | 10725115625 |
-| Gustavo Godinho               | 10724268995 | 
-| Lívia de Oliveira             | 10725115228 |
-| Vitor Steinbach               | 10724268585 | 
+| Nome:                         | RA:         |  Users GitHub
+|-------------------------------|-------------|-----------------------------------------
+| Ana Luiza Seemann Felisbino   | 10724268572 | [AnaLuiza2412](https://github.com/AnaLuiza2412)  
+| Beatriz Arevalo Freitas       | 10725115625 | [biaArevaloFreitas](https://github.com/biaArevaloFreitas), 10725115625
+| Gustavo Godinho               | 10724268995 | [Gustavo Godinho](https://github.com/gustavo-godinho) 
+| Lívia de Oliveira             | 10725115228 | [Livia0120](https://github.com/Livia0120)   
+| Vitor Steinbach               | 10724268585 | [steinbachvitor](https://github.com/steinbachvitor) 
 
 ```
 
-#### GitHub
-[AnaLuiza2412](https://github.com/AnaLuiza2412)  
-[biaArevaloFreitas](https://github.com/biaArevaloFreitas)    
-[Gustavo Godinho](https://github.com/gustavo-godinho)        
-[Livia0120](https://github.com/Livia0120)    
-[steinbachvitor](https://github.com/steinbachvitor) 
      
-
-
 ## 🛠 Tecnologias utilizadas
 - Apache NetBeans IDE 26
 - MySQL 8.0
