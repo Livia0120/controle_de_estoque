@@ -26,7 +26,7 @@ Sistema desenvolvido com a finalidade de gerenciar estoque, podendo o usuário c
 - RNF07: O código-fonte é bem documentado e estruturado para facilitar a manutenção.
 
 ## 👨‍💻Participantes
-```javascript
+
 | Nome:                         | RA:         |  Users GitHub
 |-------------------------------|-------------|-----------------------------------------
 | Ana Luiza Seemann Felisbino   | 10724268572 | [AnaLuiza2412](https://github.com/AnaLuiza2412)  
@@ -35,7 +35,7 @@ Sistema desenvolvido com a finalidade de gerenciar estoque, podendo o usuário c
 | Lívia de Oliveira             | 10725115228 | [Livia0120](https://github.com/Livia0120)   
 | Vitor Steinbach               | 10724268585 | [steinbachvitor](https://github.com/steinbachvitor) 
 
-```
+
 
      
 ## 🛠 Tecnologias utilizadas
